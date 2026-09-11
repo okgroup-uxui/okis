@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오사카 코리안 인터내셔널 스쿨 개교 80주년 기념행사 안내</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0B1226;
+    --navy:#151F42;
+    --navy-soft:#243057;
+    --navy-line:#3a4674;
+    --gold:#C9A66B;
+    --gold-light:#E8D8AF;
+    --gold-dim:#9c8455;
+    --cream:#F3F6FB;
+    --paper:#FFFFFF;
+    --orange:#FF571F;
+    --ink:#1B1E2B;
+    --muted:#6B7280;
+    --serif:'Noto Serif KR', serif;
+    --sans:'Noto Sans KR', sans-serif;
+    /* 80주년 공식 포스터 컨셉 (팝업/일정/기부자 리스트에 사용) */
+    --poster-navy:#12175A;
+    --poster-navy-deep:#0D1140;
+    --sky:#6FD4F2;
+    --sky-dim:#4FA9CC;
+    --sky-line:rgba(255,255,255,.16);
+    --display:'Black Han Sans', var(--sans);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+  }
+  img{max-width:100%;display:block;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:.22em;
+    font-weight:700;
+    color:var(--sky-dim);
+    text-transform:uppercase;
+  }
+  h1,h2,h3{font-family:var(--serif);margin:0;}
+  a{color:inherit;}
+
+  /* ===== emblem (signature element) ===== */
+  .emblem{position:relative;width:96px;height:96px;flex-shrink:0;}
+  .emblem svg{width:100%;height:100%;}
+
+  /* ===== HEADER ===== */
+  .topbar{
+    background:var(--poster-navy-deep);color:var(--sky);
+    padding:12px 24px;
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;font-size:12px;letter-spacing:.04em;
+    border-bottom:1px solid var(--sky-line);
+  }
+  .topbar .dot{width:4px;height:4px;border-radius:50%;background:var(--orange);}
+
+  /* ===== HERO ===== */
+  .hero{
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(111,212,242,.16), transparent 55%),
+      linear-gradient(180deg,var(--poster-navy) 0%, var(--poster-navy-deep) 100%);
+    color:#fff;
+    padding:72px 24px 84px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .emblem{margin:0 auto 26px;}
+  .hero-eyebrow{color:var(--sky);font-size:12px;letter-spacing:.28em;font-weight:700;text-transform:uppercase;margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(26px,4.2vw,44px);
+    font-weight:900;
+    color:#fff;
+    line-height:1.35;
+    margin-bottom:18px;
+  }
+  .hero h1 em{font-style:normal;color:var(--sky);}
+  .hero p.sub{
+    max-width:560px;margin:0 auto;
+    color:#b9bfd6;font-size:15px;
+  }
+  .hero-date-pill{
+    display:inline-block;margin-top:22px;padding:8px 18px;
+    border:1px solid var(--sky-line);border-radius:20px;
+    font-family:var(--display);font-size:13px;color:#fff;letter-spacing:.02em;
+  }
+  .hero-meta{
+    margin-top:34px;display:flex;justify-content:center;gap:28px;
+    flex-wrap:wrap;
+  }
+  .hero-meta .item{text-align:center;}
+  .hero-meta .num{font-family:var(--display);font-weight:400;font-size:22px;color:#fff;}
+  .hero-meta .lab{font-size:11px;color:var(--sky-dim);margin-top:4px;letter-spacing:.05em;}
+  .hero-footnote{
+    margin-top:30px;font-size:12px;color:rgba(255,255,255,.45);
+    letter-spacing:.01em;
+  }
+
+  /* ===== SECTION shell ===== */
+  section{padding:64px 24px;}
+  .wrap{max-width:920px;margin:0 auto;}
+  .section-head{margin-bottom:34px;text-align:center;}
+  .section-head .eyebrow{display:block;margin-bottom:10px;}
+  .section-head h2{font-size:clamp(21px,3vw,30px);color:var(--ink);font-weight:900;}
+  .section-head p{color:var(--muted);font-size:14px;margin-top:10px;}
+  .section-gold .eyebrow{color:var(--orange);}
+
+  /* ===== 인사말 (letter quote) ===== */
+  .letter{background:var(--cream);}
+  .letter-card{
+    background:var(--paper);
+    border:1px solid #E1E7F0;
+    border-radius:2px;
+    padding:40px clamp(24px,5vw,56px);
+    position:relative;
+  }
+  .letter-card::before{
+    content:'"';
+    position:absolute;top:6px;left:22px;
+    font-family:var(--serif);font-size:80px;color:#D7E6F0;line-height:1;
+  }
+  .letter-card:has(.letter-placeholder)::before{display:none;}
+  .letter-quote{
+    font-family:var(--serif);
+    font-size:clamp(16px,2vw,19px);
+    line-height:1.9;
+    color:var(--ink);
+    position:relative;z-index:1;
+  }
+  .letter-quote b{color:var(--orange);}
+  .letter-placeholder{
+    color:#8a90a8;font-style:normal;font-family:var(--sans);font-size:14px;
+    border:1.5px dashed #cdd4e2;border-radius:4px;padding:20px;
+    line-height:1.8;
+  }
+  .letter-sign{
+    margin-top:28px;text-align:right;
+    font-size:13px;color:var(--muted);
+  }
+  .letter-sign b{display:block;font-family:var(--serif);font-size:16px;color:var(--ink);margin-top:4px;}
+
+  /* ===== 캠페인 개요 ===== */
+  .overview-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  }
+  .ov-card{
+    border:1px solid #E1E7F0;border-radius:2px;padding:26px 22px;
+    background:var(--paper);
+  }
+  .ov-card .n{font-family:var(--display);font-weight:400;color:var(--poster-navy);font-size:15px;margin-bottom:10px;letter-spacing:.03em;}
+  .ov-card h3{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink);}
+  .ov-card p{font-size:13.5px;color:var(--muted);margin:0;}
+
+  /* ===== 역대 이사장 ===== */
+  .verify-flag{
+    display:flex;align-items:center;justify-content:center;gap:6px;
+    margin:0 auto 26px;padding:8px 16px;border:1px dashed #cdd4e2;
+    border-radius:20px;font-size:12px;color:#8a90a8;
+    width:fit-content;
+  }
+  .leaders-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  }
+  .leader-card{
+    border:1px solid #E1E7F0;border-radius:2px;padding:16px 10px;
+    text-align:center;background:var(--paper);
+  }
+  .leader-card.current{background:var(--poster-navy);border-color:var(--poster-navy);}
+  .leader-card .role{font-size:10.5px;color:var(--sky-dim);font-weight:700;margin-bottom:6px;}
+  .leader-card.current .role{color:var(--sky);}
+  .leader-card .lname{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--ink);}
+  .leader-card.current .lname{color:#fff;}
+  .leader-card .lyear{font-size:11px;color:var(--muted);margin-top:3px;}
+  .leader-card.current .lyear{color:rgba(255,255,255,.6);}
+
+  /* ===== 일정 timeline ===== */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{
+    content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--orange) 0%, var(--orange) 55%, var(--sky-dim) 100%);
+  }
+  .t-item{position:relative;padding-bottom:34px;}
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:'';position:absolute;left:-28px;top:2px;width:14px;height:14px;
+    border-radius:50%;background:var(--paper);border:3px solid var(--orange);
+  }
+  .t-item.done::before{background:var(--orange);border-color:var(--orange);}
+  .t-date{font-family:var(--serif);font-weight:700;color:var(--orange);font-size:14px;margin-bottom:4px;}
+  .t-title{font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:4px;}
+  .t-desc{font-size:13.5px;color:var(--muted);}
+  .t-tag{
+    display:inline-block;margin-left:8px;padding:2px 8px;border-radius:20px;
+    background:#FFF0E9;color:var(--orange);font-size:11px;font-weight:700;vertical-align:2px;
+  }
+  .t-item.event::before{background:var(--poster-navy);border-color:var(--sky-dim);}
+  .t-tag.event{background:#E7F8FC;color:var(--sky-dim);}
+  .t-date.event{color:var(--sky-dim);}
+
+  /* ===== 기부 방법 ===== */
+  .method-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .method-card{
+    background:var(--poster-navy);color:#fff;
+    border-radius:2px;padding:26px 24px;
+  }
+  .method-card h3{font-size:14px;letter-spacing:.05em;color:var(--sky);margin-bottom:16px;font-weight:700;font-family:var(--sans);}
+  .method-row{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:9px 0;border-bottom:1px dashed var(--sky-line);}
+  .method-row:last-child{border-bottom:none;}
+  .method-row .k{color:var(--sky-dim);flex-shrink:0;}
+  .method-row .v{color:#fff;text-align:right;font-weight:500;}
+
+  /* ===== 기부자 리스트 — 80주년 포스터 컨셉(스카이블루) 적용 ===== */
+  .honors{background:var(--cream);color:var(--ink);}
+  .honors .section-head .eyebrow{color:var(--orange);}
+  .honors .section-head h2{color:var(--ink);}
+  .honors .section-head p{color:var(--muted);}
+  .sample-flag{
+    display:inline-flex;align-items:center;gap:6px;
+    margin:0 auto 26px;padding:8px 16px;border:1px solid #E1E7F0;
+    border-radius:20px;font-size:12px;color:var(--muted);
+    background:var(--paper);
+    width:fit-content;
+  }
+  .sample-flag .dot2{width:6px;height:6px;border-radius:50%;background:var(--orange);}
+  .honor-search-wrap{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin-bottom:24px;flex-wrap:wrap;
+  }
+  .honor-search{
+    background:var(--paper);border:1px solid #d7dde8;color:var(--ink);
+    padding:10px 16px;border-radius:20px;font-size:13px;font-family:var(--sans);
+    width:240px;outline:none;
+  }
+  .honor-search::placeholder{color:#a3aabb;}
+  .honor-search:focus{border-color:var(--poster-navy);}
+  .honor-count{font-size:12px;color:var(--poster-navy);}
+  .honors-empty{text-align:center;color:var(--muted);font-size:13px;padding:30px 0;}
+
+  /* 흰 배경 + 선 구분 명단 테이블 */
+  .honors-table{
+    background:var(--paper);
+    border-top:2px solid var(--poster-navy);
+  }
+  .honors-index{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .index-name{
+    font-size:14px;color:var(--ink);padding:14px 16px;text-align:center;
+    border-bottom:1px solid #E7EBF2;
+  }
+  .index-name mark{background:none;color:var(--orange);font-weight:700;}
+  .honors-note{margin-top:26px;text-align:center;font-size:12px;color:var(--muted);}
+
+
+  /* ===== 문의 ===== */
+  .contact{background:var(--cream);}
+  .contact-box{
+    background:var(--paper);border:1px solid #E1E7F0;border-radius:2px;
+    padding:28px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .contact-box .c-item{flex:1;min-width:200px;}
+  .contact-box .c-lab{font-size:11px;color:var(--poster-navy);letter-spacing:.08em;margin-bottom:6px;text-transform:uppercase;}
+  .contact-box .c-val{font-size:14px;font-weight:700;color:var(--ink);}
+
+  footer{
+    background:var(--poster-navy-deep);color:#7d84c0;text-align:center;
+    padding:32px 24px;font-size:12px;
+  }
+  footer .emblem{width:44px;height:44px;margin:0 auto 12px;}
+
+  /* ===== MOBILE ===== */
+  @media (max-width:700px){
+    section{padding:48px 18px;}
+    .overview-grid{grid-template-columns:1fr;}
+    .method-grid{grid-template-columns:1fr;}
+    .honors-index{grid-template-columns:repeat(3,1fr);}
+    .leaders-grid{grid-template-columns:repeat(3,1fr);}
+    .hero{padding:56px 18px 64px;}
+    .hero-meta{gap:20px;}
+    .letter-card{padding:30px 20px;}
+    .contact-box{flex-direction:column;}
+  }
+  @media (max-width:420px){
+    .honors-index{grid-template-columns:repeat(2,1fr);}
+    .leaders-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE ================= -->
+<div class="topbar"><span>OK금융그룹</span><span class="dot"></span><span>오사카 코리안 인터내셔널 스쿨(OKIS) 개교 80주년 기념행사 안내</span></div>
+
+<header class="hero">
+  <div class="emblem">
+    <svg viewBox="0 0 100 100"><g fill="none" stroke="#fff" stroke-width="1.6">
+      <circle cx="50" cy="50" r="47"/><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="33"/>
+    </g>
+    <text x="50" y="46" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="9" fill="#6FD4F2" letter-spacing="1">SINCE</text>
+    <text x="50" y="61" text-anchor="middle" font-family="Black Han Sans" font-size="15" fill="#fff">1946</text>
+    </svg>
+  </div>
+  <div class="hero-eyebrow">2026 · OKIS 80th Anniversary</div>
+  <h1>오사카 코리안 인터내셔널 스쿨<br><em>개교 80주년</em>을 함께 축하합니다</h1>
+  <p class="sub">
+    세계 최초의 재외한국학교, OKIS가 걸어온 80년의 발자취를 기념하는<br class="br-desktop">
+    뜻깊은 자리에 여러분 모두를 초대합니다.
+  </p>
+  <div class="hero-date-pill">개교 80주년 기념행사 · 2026.10.02 FRI–10.03 SAT</div>
+  <div class="hero-meta">
+    <div class="item"><div class="num">80</div><div class="lab">개교 80주년</div></div>
+    <div class="item"><div class="num">2 DAYS</div><div class="lab">기념행사 일정</div></div>
+    <div class="item"><div class="num">1946</div><div class="lab">세계 최초 재외한국학교 설립</div></div>
+  </div>
+  <div class="hero-footnote">OK금융그룹도 이번 80주년을 기념해 학교발전기금으로 마음을 함께합니다</div>
+</header>
+
+<!-- 인사말 -->
+<section class="letter">
+  <div class="wrap">
+    <div class="section-head section-gold">
+      <span class="eyebrow">Message</span>
+      <h2>OKIS 이사장 인사말</h2>
+      <p>학교법인 금강학원 개교 80주년을 맞아</p>
+    </div>
+    <div class="letter-card">
+      <p class="letter-quote letter-placeholder">
+        ※ 이사장님 인사말 원문을 이 자리에 넣어주세요.<br>
+        원문 텍스트를 보내주시면 바로 이 영역을 교체해 드릴게요.
+      </p>
+      <div class="letter-sign">
+        오사카 코리안 인터내셔널 스쿨 이사장<br>
+        <b>최 윤</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 캠페인 개요 -->
+<section id="overview">
+  <div class="wrap">
+    <div class="section-head section-gold">
+      <span class="eyebrow">About OKIS</span>
+      <h2>금강학원이 걸어온 길</h2>
+      <p>80년의 뿌리, 100년의 날개 — 세계 최초의 재외한국학교</p>
+    </div>
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="n">1946</div>
+        <h3>니시나리 조선인 학교 설립</h3>
+        <p>니시나리 조선인 교육회 결성과 함께 니시나리 조선인 소학교를 개설, 재일동포 1세대가 학교의 뿌리를 세웠습니다.</p>
+      </div>
+      <div class="ov-card">
+        <div class="n">1961</div>
+        <h3>세계 최초 재외한국학교 인가</h3>
+        <p>대한민국 문교부로부터 재외한국학교로 인가받으며, 세계 최초의 재외한국학교로 자리매김했습니다.</p>
+      </div>
+      <div class="ov-card">
+        <div class="n">2021</div>
+        <h3>오사카 금강 인터내셔널 스쿨</h3>
+        <p>‘오사카 금강 인터내셔널 스쿨(OKIS)’로 교명을 변경하며 국제학교로의 전환을 시작했습니다.</p>
+      </div>
+      <div class="ov-card">
+        <div class="n">2026</div>
+        <h3>개교 80주년, 교명 재변경</h3>
+        <p>창립 80주년을 맞아 ‘오사카 코리안 인터내셔널 스쿨(OKIS)’로 교명을 다시 변경하고 기념행사를 갖습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 역대 이사장 -->
+<section id="leaders">
+  <div class="wrap">
+    <div class="section-head section-gold">
+      <span class="eyebrow">Our History</span>
+      <h2>금강을 지켜온 사람들</h2>
+      <p>재일동포의 헌신으로 지켜온 80년, 금강을 이어오신 분들</p>
+    </div>
+    <div class="verify-flag">※ 원본 브로슈어 이미지에서 옮긴 명단입니다 · 표기가 다르면 알려주세요</div>
+    <div class="leaders-grid">
+      <div class="leader-card"><div class="role">대표이사</div><div class="lname">백원</div><div class="lyear">1949</div></div>
+      <div class="leader-card"><div class="role">初代</div><div class="lname">최인용</div><div class="lyear">1951</div></div>
+      <div class="leader-card"><div class="role">2代</div><div class="lname">서인용</div><div class="lyear">1971</div></div>
+      <div class="leader-card"><div class="role">3代</div><div class="lname">박한식</div><div class="lyear">1977</div></div>
+      <div class="leader-card"><div class="role">4代</div><div class="lname">박승환</div><div class="lyear">1981</div></div>
+      <div class="leader-card"><div class="role">5代</div><div class="lname">고기수</div><div class="lyear">2001</div></div>
+      <div class="leader-card"><div class="role">6代</div><div class="lname">곽창군</div><div class="lyear">2004</div></div>
+      <div class="leader-card"><div class="role">7代</div><div class="lname">고기수</div><div class="lyear">2005</div></div>
+      <div class="leader-card"><div class="role">8代</div><div class="lname">김한덕</div><div class="lyear">2006</div></div>
+      <div class="leader-card"><div class="role">9代</div><div class="lname">양광성</div><div class="lyear">2012</div></div>
+      <div class="leader-card"><div class="role">10代</div><div class="lname">조영길</div><div class="lyear">2015</div></div>
+      <div class="leader-card current"><div class="role">11代</div><div class="lname">최 윤</div><div class="lyear">2019~</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 일정 -->
+<section class="letter" id="schedule">
+  <div class="wrap">
+    <div class="section-head section-gold">
+      <span class="eyebrow">Schedule</span>
+      <h2>개교 80주년 기념행사 일정 안내</h2>
+      <p>기념행사 당일 일정과, 함께 준비되는 발전기금 캠페인 일정을 안내드립니다</p>
+    </div>
+    <div class="timeline">
+      <div class="t-item done">
+        <div class="t-date">2026. 08. 05</div>
+        <div class="t-title">기부 서한 발송 <span class="t-tag">완료</span></div>
+        <div class="t-desc">OK금융그룹 회장 명의로 오피니언 리더 1,500여 분께 기부 전환 안내 서한을 발송했습니다.</div>
+      </div>
+      <div class="t-item done">
+        <div class="t-date">2026. 08 ~ 09</div>
+        <div class="t-title">기부 캠페인 안내 기간 <span class="t-tag">진행중</span></div>
+        <div class="t-desc">사내 게시판 및 팝업 공지를 통해 캠페인 취지와 참여 방법을 안내합니다.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026. 09 中</div>
+        <div class="t-title">추석 명절 (기부 전환 기준일)</div>
+        <div class="t-desc">매년 명절 선물을 대신하여, 올해는 전액이 OKIS 발전기금으로 출연됩니다.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026. 09 말</div>
+        <div class="t-title">기부금 출연 완료</div>
+        <div class="t-desc">OK금융그룹이 추석 선물 예산 전액(약 3억 상당)을 OKIS 앞으로 출연합니다.</div>
+      </div>
+      <div class="t-item event">
+        <div class="t-date event">2026. 10. 02 (금)</div>
+        <div class="t-title">OKIS 개교 80주년 기념행사 D1 <span class="t-tag event">공식 기념식</span></div>
+        <div class="t-desc">학교법인 금강학원 개교 80주년 공식 기념식이 열리며, OKIS Growth 센터 건립 추진과 기부자 명단이 함께 공개됩니다.</div>
+      </div>
+      <div class="t-item event">
+        <div class="t-date event">2026. 10. 03 (토)</div>
+        <div class="t-title">OKIS 개교 80주년 기념행사 D2 <span class="t-tag event">커뮤니티 데이</span></div>
+        <div class="t-desc">동문·재학생 가족과 함께하는 축하 행사가 이어지며, OKIS Honors Club 현판 제막식이 진행됩니다.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026. 10 ~ 11</div>
+        <div class="t-title">감사장 발송 &amp; 홈페이지 명단 게첨</div>
+        <div class="t-desc">참여해 주신 모든 분의 성함이 기부자 현판과 학교 홈페이지에 새겨지고, 개별 감사장이 발송됩니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 기부 방법 -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head section-gold">
+      <span class="eyebrow">Take Part</span>
+      <h2>함께하는 방법 — 학교발전기금 안내</h2>
+      <p>기념행사와 함께 진행되는 OKIS 학교발전기금 계좌 정보입니다</p>
+    </div>
+    <div class="method-grid">
+      <div class="method-card">
+        <h3>① 한국 내에서 송금</h3>
+        <div class="method-row"><span class="k">계좌번호</span><span class="v">신한은행 140-016-474118</span></div>
+        <div class="method-row"><span class="k">계좌주명</span><span class="v">(재)오케이배정장학재단</span></div>
+        <div class="method-row"><span class="k">기부문의</span><span class="v">02-3704-9962, 9724</span></div>
+      </div>
+      <div class="method-card">
+        <h3>② 일본 국내에서 송금</h3>
+        <div class="method-row"><span class="k">銀行名</span><span class="v">りそな銀行 萩ノ茶屋支店</span></div>
+        <div class="method-row"><span class="k">口座番号</span><span class="v">普通 0363451</span></div>
+        <div class="method-row"><span class="k">口座名義</span><span class="v">学校法人 金剛学園</span></div>
+        <div class="method-row"><span class="k">担当者</span><span class="v">チョン・ジョンホ / t-jeon@kongo-okis.com</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 기부자 리스트 -->
+<section class="honors">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-head">
+      <span class="eyebrow">OKIS Honors Club</span>
+      <h2>80주년을 함께해주신 분들</h2>
+      <p>여러분의 마음이 OKIS의 다음 100년에 새겨집니다</p>
+    </div>
+    <div class="sample-flag" id="sampleFlag"><span class="dot2"></span>샘플 데이터입니다 · 실제 명단은 서버에 donors.xlsx를 올리면 자동으로 반영됩니다</div>
+
+    <div class="honor-search-wrap">
+      <input type="text" id="honorSearch" class="honor-search" placeholder="성함으로 검색 (예: 홍길동)">
+      <span id="honorCount" class="honor-count"></span>
+    </div>
+
+    <div class="honors-table">
+      <div class="honors-index" id="honorsIndex"></div>
+    </div>
+
+    <div id="honorsEmpty" class="honors-empty" style="display:none;">검색 결과가 없습니다.</div>
+
+    <div class="honors-note" id="honorsNote">전체 명단(1,500여 분)은 2026.10.02(금)–10.03(토) OKIS 개교 80주년 기념행사에서 순차 공개될 예정입니다.</div>
+  </div>
+</section>
+
+<!-- 문의 -->
+<section class="contact">
+  <div class="wrap">
+    <div class="contact-box">
+      <div class="c-item"><div class="c-lab">행사·기부 문의</div><div class="c-val">AX마케팅부 · 02-3704-9962</div></div>
+      <div class="c-item"><div class="c-lab">학교 문의</div><div class="c-val">t-jeon@kongo-okis.com</div></div>
+      <div class="c-item"><div class="c-lab">학교 주소</div><div class="c-val">〒559-0034 오사카시 스미노에구 난코키타 2초메 6번 10호</div></div>
+      <div class="c-item"><div class="c-lab">학교 홈페이지</div><div class="c-val">kongogakuen.ed.jp/kr</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="emblem">
+    <svg viewBox="0 0 100 100"><g fill="none" stroke="#fff" stroke-width="2">
+      <circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38"/>
+    </g></svg>
+  </div>
+  OK금융그룹 × 오사카 코리안 인터내셔널 스쿨(OKIS) · 1946–2026
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+  /* =========================================================
+     기부자 명단 — 서버에 올라간 엑셀 파일 자동 렌더링
+
+     EXCEL_FILE에 서버에 저장된 파일의 URL을 넣으면 됩니다.
+     - 이 HTML과 같은 서버/같은 폴더면 상대경로("./donors.xlsx")로도 충분해요.
+     - 다른 도메인(예: 사내 다른 서버, CDN 등)이면 전체 URL을 넣으면 되는데,
+       그 서버가 CORS 응답 헤더(Access-Control-Allow-Origin)를 허용해야
+       브라우저가 이 페이지에서 파일을 읽어올 수 있습니다.
+       (같은 도메인이면 이 문제 자체가 없습니다.)
+     - CORS가 막혀있으면 콘솔에 "Failed to fetch" 또는 CORS 에러가 뜨는데,
+       그 경우 서버 쪽에서 헤더를 열어주거나, 같은 도메인으로 옮겨야 합니다.
+
+     기대하는 컬럼(1행 헤더): 순번 | 성명
+     - 이름만 표시하며, 가나다순으로 자동 정렬됩니다.
+     - 파일을 못 찾거나 형식이 안 맞으면 화면에 있던 샘플 데이터가 그대로 유지됩니다.
+     - file:// 로 로컬에서 그냥 열면 브라우저 보안정책상 fetch가 막혀 자동 로드가 안 되니,
+       실제 반영을 확인하려면 웹 서버(GitHub Pages 등)에 올려서 열어주세요.
+     ========================================================= */
+  const EXCEL_FILE = './donors.xlsx'; // ← 서버에 올린 실제 파일 경로/URL로 교체하세요
+
+  const indexBox   = document.getElementById('honorsIndex');
+  const searchBox  = document.getElementById('honorSearch');
+  const countEl    = document.getElementById('honorCount');
+  const emptyEl    = document.getElementById('honorsEmpty');
+  const sampleFlag = document.getElementById('sampleFlag');
+  const noteEl     = document.getElementById('honorsNote');
+
+  // 샘플 데이터 (엑셀 로드 실패 시 표시)
+  let allDonors = ['홍길동','김영희','이철수','박민준','최서연','정다은','강태윤','조은지','윤도현','임수빈','한가을','오세훈'];
+
+  const CHOSEONG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  function getInitial(name){
+    const code = (name || '').charCodeAt(0) - 0xAC00;
+    if(code < 0 || code > 11171) return '#';
+    return CHOSEONG[Math.floor(code / 588)];
+  }
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+  function highlight(name, q){
+    if(!q) return escapeHTML(name);
+    const i = name.indexOf(q);
+    if(i === -1) return escapeHTML(name);
+    return escapeHTML(name.slice(0,i)) + '<mark>' + escapeHTML(name.slice(i,i+q.length)) + '</mark>' + escapeHTML(name.slice(i+q.length));
+  }
+
+  function sortKey(name){
+    // "(주)쉘라인" 처럼 앞에 붙은 괄호 표기는 정렬 시에는 무시하고 실제 이름 기준으로 정렬
+    return (name || '').replace(/^\([^)]{1,4}\)\s*/, '');
+  }
+
+  function render(){
+    const q = searchBox.value.trim();
+    const list = (q ? allDonors.filter(n => n.includes(q)) : allDonors.slice()).sort((a,b) => sortKey(a).localeCompare(sortKey(b), 'ko'));
+
+    emptyEl.style.display = list.length === 0 ? 'block' : 'none';
+    indexBox.style.display = list.length === 0 ? 'none' : 'grid';
+    countEl.textContent = allDonors.length ? `총 ${allDonors.length.toLocaleString()}명 중 ${list.length.toLocaleString()}명 표시` : '';
+
+    indexBox.innerHTML = list.map(n => `<div class="index-name">${highlight(n, q)}</div>`).join('');
+  }
+
+  searchBox.addEventListener('input', render);
+
+  // 엑셀 워크북(arrayBuffer)에서 성명 목록을 뽑아내는 파서
+  function parseWorkbook(buf){
+    const wb = XLSX.read(buf, { type: 'array' });
+    const sheet = wb.Sheets[wb.SheetNames[0]];
+    const rows  = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+    return rows.map(r => String(r['성명'] ?? r['이름'] ?? '').trim()).filter(Boolean);
+  }
+
+  function applyDonors(donors, sourceLabel){
+    if(donors.length === 0) throw new Error('유효한 성명 행이 없습니다');
+    allDonors = donors;
+    searchBox.disabled = false;
+    sampleFlag.style.display = 'none';
+    noteEl.textContent = `총 ${donors.length.toLocaleString()}분이 참여해 주셨습니다. 마음을 나눠주신 모든 분께 감사드립니다.`;
+    render();
+    console.info(`[OKIS Honors] ${sourceLabel}에서 ${donors.length}명 로드 완료`);
+  }
+
+  // 서버(또는 외부 링크)에 올라간 엑셀 파일을 자동으로 fetch해서 불러옵니다.
+  async function loadDonorsFromExcel(){
+    try{
+      const res = await fetch(EXCEL_FILE, { cache: 'no-store' });
+      if(!res.ok) throw new Error('응답 오류: ' + res.status);
+      const buf = await res.arrayBuffer();
+      applyDonors(parseWorkbook(buf), EXCEL_FILE + ' (자동)');
+    }catch(err){
+      // 파일이 없거나(또는 file:// 로컬 실행), 외부 링크라면 CORS 차단일 가능성이 큽니다.
+      console.warn(
+        '[OKIS Honors] 엑셀 로드 실패, 샘플 데이터 유지. ' +
+        '외부 링크를 쓰는 경우 브라우저 콘솔에 CORS 관련 에러가 같이 뜨는지 확인해보세요:',
+        err.message
+      );
+      render();
+    }
+  }
+
+  render();
+  loadDonorsFromExcel();
+</script>
+
+</body>
+</html>
