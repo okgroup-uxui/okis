@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OKIS 80주년 · 학교발전기금</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --p1:#0d045f;        /* 포인트1 */
+    --p2:#144697;        /* 포인트2 */
+    --p3:#7dccf3;        /* 포인트3 */
+    --orange:#ff571f;
+    --black:#1b1b1b;     /* 금강블랙 */
+    --gray:#6b7280;      /* 금강블랙3 */
+    --navy-bg:#0d1140;
+    --sub-navy:#9aa1bf;
+    --light-bg:#f3f6fb;
+    --line:#e8ebf1;
+    --sans:'Noto Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --title:'Inter', 'Noto Sans KR', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--black);background:#fff;-webkit-font-smoothing:antialiased}
+
+  /* ---------- 공통 섹션 ---------- */
+  .sec{padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:34px;overflow:hidden}
+  .sec--navy{background:var(--navy-bg);padding-left:55px;padding-right:55px}
+  .sec--light{background:var(--light-bg)}
+  .sec--white{background:#fff}
+
+  .sec-head{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+  .sec-head .eyebrow{font-size:12px;line-height:18px;font-weight:700;text-transform:uppercase;color:var(--orange)}
+  .sec-head h2{font-family:var(--title);font-size:30px;font-weight:700;line-height:1.2;color:var(--black)}
+  .sec-head p{font-size:14px;color:var(--gray);margin-top:2px}
+  .sec--navy .eyebrow{color:var(--p3)}
+  .sec--navy h2{color:#fff}
+  .sec--navy .sec-head p{color:var(--sub-navy)}
+
+  .inner{width:100%;max-width:870px}
+
+  /* ---------- 기부자 명단 ---------- */
+  .donors{width:100%;max-width:860px;background:#fff;border-top:2px solid var(--p2)}
+  .donor-grid{display:grid;grid-template-columns:repeat(4,1fr);list-style:none}
+  .donor-grid li{
+    height:48px;display:flex;align-items:center;justify-content:center;
+    font-size:13px;color:#333;border-bottom:1px solid var(--line);
+    padding:0 6px;text-align:center;word-break:keep-all;
+  }
+  .donor-status{padding:48px 20px;text-align:center;font-size:14px;color:var(--gray)}
+
+  /* 구간(등급) 블록 */
+  .tier + .tier{border-top:2px solid var(--p2)}
+  .tier-head{
+    display:flex;align-items:baseline;justify-content:center;gap:8px;
+    padding:22px 16px 14px;border-bottom:1px solid var(--line);background:#f8f9fc;
+  }
+  .tier-head h3{font-size:16px;font-weight:700;color:var(--p2)}
+  .tier-head span{font-size:12px;color:var(--gray)}
+  .donor-grid li .t{display:block;font-size:11px;color:var(--gray);margin-top:2px}
+  /* 상단 구간(1천만원 이상)은 이름을 크게, 3열로 */
+  .tier--major .donor-grid{grid-template-columns:repeat(3,1fr)}
+  .tier--major .donor-grid li{height:auto;min-height:64px;padding:12px 8px;flex-direction:column;font-size:15px;font-weight:600;color:var(--black)}
+  .tier--major .donor-grid li .t{font-size:12px;font-weight:400}
+  .donor-grid li{flex-direction:column}
+
+  /* ---------- 계좌 안내 ---------- */
+  .accounts{display:flex;gap:30px;align-items:stretch}
+  .acc{flex:1 1 0;min-width:0;background:var(--p1);padding:20px;display:flex;flex-direction:column;gap:16px;font-size:14px}
+  .acc h3{font-size:14px;font-weight:700;color:#fff}
+  .acc dl{display:flex;flex-direction:column;gap:10px;font-weight:600;flex:1;justify-content:center}
+  .acc dl div{display:flex;justify-content:space-between;gap:16px}
+  .acc dt{color:var(--p3);flex-shrink:0}
+  .acc dd{color:#fff;text-align:right}
+  .acc dd a{color:inherit;text-decoration:none}
+  .acc dd a:hover{text-decoration:underline}
+
+  /* ---------- 세제 우대 ---------- */
+  .tax{display:flex;flex-direction:column;gap:24px}
+  .tax-item{display:flex;flex-direction:column;gap:8px}
+  .tax-item h3,.app-col h3{font-size:16px;font-weight:700;color:var(--p2)}
+  .tax-item p{font-size:14px;line-height:1.6}
+  .tax-note{border-top:1px solid #d9dde5;padding-top:14px;font-size:14px;line-height:22px}
+  .tax-note small{display:block;font-size:13px;color:var(--gray)}
+
+  /* ---------- 신청서 ---------- */
+  .app{display:flex;flex-direction:column;align-items:center;gap:24px}
+  .app-row{display:flex;gap:34px;justify-content:center}
+  .app-col{display:flex;flex-direction:column;align-items:center;gap:16px}
+  .app-btn{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    width:400px;max-width:100%;height:50px;background:var(--p1);color:#fff;
+    font-size:16px;text-decoration:none;overflow:hidden;transition:background .2s;
+  }
+  .app-btn::after{content:"";position:absolute;right:0;top:50%;width:53px;height:1px;background:rgba(255,255,255,.7);transition:width .25s}
+  .app-btn:hover{background:var(--p2)}
+  .app-btn:hover::after{width:70px}
+  .app-btn:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+  .app-foot{font-size:14px;text-align:center}
+
+  /* ---------- 반응형 ---------- */
+  @media (max-width:900px){
+    .accounts{flex-direction:column;gap:16px}
+    .app-row{flex-direction:column;gap:24px;width:100%}
+    .app-col{width:100%}
+    .app-btn{width:100%}
+  }
+  @media (max-width:640px){
+    .sec--navy{padding-left:16px;padding-right:16px}
+    .sec-head h2{font-size:22px}
+    .sec-head p{font-size:13px}
+    .donor-grid,.tier--major .donor-grid{grid-template-columns:repeat(2,1fr)}
+    .tier--major .donor-grid li{font-size:14px}
+    .acc dl div{flex-direction:column;gap:2px}
+    .acc dd{text-align:left;word-break:break-all}
+    .app-btn{font-size:15px;padding:0 60px 0 16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ① 기부자 명단 -->
+<section class="sec sec--navy" id="honors">
+  <div class="sec-head">
+    <span class="eyebrow">OKIS Honors Club</span>
+    <h2>80주년을 함께해주신 분들</h2>
+    <p>여러분의 마음이 OKIS의 다음 100년에 새겨집니다</p>
+  </div>
+  <div class="donors">
+    <div id="donorTiers"></div>
+    <p class="donor-status" id="donorStatus">명단을 불러오는 중입니다…</p>
+  </div>
+</section>
+
+<!-- ② 함께하는 방법 -->
+<section class="sec sec--light" id="take-part">
+  <div class="sec-head">
+    <span class="eyebrow">Take Part</span>
+    <h2>함께하는 방법 — 학교발전기금 안내</h2>
+    <p>기념행사와 함께 진행되는 OKIS 학교발전기금 계좌 정보입니다</p>
+  </div>
+  <div class="inner accounts">
+    <div class="acc">
+      <h3>① 한국 내에서 송금</h3>
+      <dl>
+        <div><dt>계좌번호</dt><dd>신한은행 140-016-474118</dd></div>
+        <div><dt>계좌주명</dt><dd>(재)오케이배정장학재단</dd></div>
+        <div><dt>기부문의</dt><dd>02-3704-9962, 9724</dd></div>
+      </dl>
+    </div>
+    <div class="acc" lang="ja">
+      <h3>② 日本国内からの送金</h3>
+      <dl>
+        <div><dt>銀行名</dt><dd>りそな銀行 萩ノ茶屋支店</dd></div>
+        <div><dt>口座番号</dt><dd>普通 0363451</dd></div>
+        <div><dt>口座名義</dt><dd>学校法人金剛学園 理事長 崔 潤</dd></div>
+        <div><dt>担当者</dt><dd>チョン・ジョンホン <a href="mailto:t-jeon@kongo-okis.com">t-jeon@kongo-okis.com</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 세제 우대 -->
+<section class="sec sec--white" id="tax">
+  <div class="sec-head">
+    <span class="eyebrow">Tax System</span>
+    <h2>세제상 우대에 대하여</h2>
+    <p>OKIS 학교발전기금 기부 시 받으실 수 있는 세제 혜택을 안내해 드립니다</p>
+  </div>
+  <div class="inner tax">
+    <div class="tax-item">
+      <h3>법인의 경우</h3>
+      <p>법인으로부터의 기부금은 특정공익증진법인에 대한 기부금으로서 일정 한도액까지 일반 기부금과는 별도로 손금에 산입할 수 있습니다.</p>
+    </div>
+    <div class="tax-item">
+      <h3>개인의 경우</h3>
+      <p>본 법인은 특정공익증진법인에 해당하므로, 본 법인에 대한 기부금은 일정한 요건을 충족하는 경우 소득세의 기부금 공제(소득공제) 대상이 됩니다.</p>
+    </div>
+    <p class="tax-note">
+      기부금액은 총소득금액 등의 40% 상당액을 한도로 하며, 기부금액에서 2,000엔을 공제한 금액이 소득금액에서 공제됩니다.
+      <small>※ 세제상 우대조치를 받기 위해서는 확정신고 등 소정의 절차가 필요합니다.</small>
+    </p>
+  </div>
+</section>
+
+<!-- ④ 기부금 신청서 -->
+<section class="sec sec--light" id="application">
+  <div class="sec-head">
+    <span class="eyebrow">Application</span>
+    <h2>기부금 신청서</h2>
+    <p>기부 유형에 맞는 신청서를 내려받아 작성해 주세요</p>
+  </div>
+  <div class="app">
+    <div class="app-row">
+      <div class="app-col">
+        <h3>법인의 경우</h3>
+        <!-- TODO: 실제 PDF 경로로 교체 -->
+        <a class="app-btn" href="./pdf/application-corporate.pdf" target="_blank" rel="noopener">수증자 지정 기부금 신청서(PDF)</a>
+      </div>
+      <div class="app-col">
+        <h3>개인의 경우</h3>
+        <!-- TODO: 실제 PDF 경로로 교체 -->
+        <a class="app-btn" href="./pdf/application-individual.pdf" target="_blank" rel="noopener">특정 공익 증진 법인 기부 신청서(PDF)</a>
+      </div>
+    </div>
+    <p class="app-foot">작성하신 후 우편으로 학교법인 금강학원 사무실로 보내주시기 바랍니다.</p>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* =========================================================
+   기부자 명단 — 엑셀 자동 로드 (구간별)
+   - '상단 명판' 시트: B열 구간 이름을 아래로 채워 읽고, '기부월 문구' 열을 이름으로 사용
+     (기부월 문구가 비어 있으면 '입금내용' 사용). 순서는 엑셀 순서 그대로.
+   - '하단 명판' 시트: B열 이름 전체를 100만원 미만 구간으로, 가나다순 정렬
+   - 이름 칸의 줄바꿈(Alt+Enter)은 "이름 / 직함" 두 줄로 표시
+   - 구간 표기는 아래 TIER_LABELS에서 수정. 새 구간이 생기면 여기에 한 줄 추가
+     (없으면 엑셀에 적힌 그대로 표시됩니다)
+   ========================================================= */
+const EXCEL_URL = 'https://https://okgroup-uxui.github.io/okis/donors.xlsx';
+const TIER_LABELS = {
+  '10억':'10억원 이상', '1억':'1억원 이상', '5천이상':'5천만원 이상', '3천 이상':'3천만원 이상',
+  '1천 이상':'1천만원 이상', '500 이상':'500만원 이상', '100~500 미만':'100만원 이상'
+};
+const BOTTOM_LABEL = '100만원 미만';
+const COUNT_UNIT = '명';
+const MAJOR_TIERS = 6;   // 위에서부터 몇 개 구간을 크게 보여줄지 (10억~1천만원)
+
+(async function loadDonors(){
+  const wrap   = document.getElementById('donorTiers');
+  const status = document.getElementById('donorStatus');
+  const clean  = v => String(v ?? '').replace(/\r/g,'').trim();
+
+  try{
+    const res = await fetch(EXCEL_URL + '?v=' + Date.now(), {cache:'no-store'});
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const wb = XLSX.read(await res.arrayBuffer(), {type:'array'});
+    const rowsOf = n => wb.Sheets[n] ? XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, defval:''}) : null;
+
+    const tiers = [];   // [{label, names:[...] }]
+
+    /* ---- 상단 명판 ---- */
+    const top = rowsOf('상단 명판');
+    if(top){
+      const h = top.findIndex(r => r.some(c => clean(c) === '기부월 문구'));
+      if(h === -1) throw new Error("'기부월 문구' 헤더를 찾지 못함");
+      const hdr     = top[h].map(clean);
+      const nameCol = hdr.indexOf('기부월 문구');
+      const depCol  = hdr.indexOf('입금내용');
+      const noCol   = hdr.indexOf('No');
+      const tierCol = 1;   // B열: 구간 이름 (각 구간 첫 줄에만 적혀 있음)
+      let cur = null;
+      for(const r of top.slice(h + 1)){
+        const t = clean(r[tierCol]).replace(/\s*\n\s*/g,' ');
+        if(t){ cur = {label: TIER_LABELS[t] || t, names: []}; tiers.push(cur); }
+        const name = clean(r[nameCol]) || clean(r[depCol]);
+        if(!cur || !name) continue;
+        if(noCol !== -1 && clean(r[noCol]) === '') continue;   // 번호 없는 메모 줄 건너뜀
+        cur.names.push(name);
+      }
+    }
+
+    /* ---- 하단 명판 ---- */
+    const bottom = rowsOf('하단 명판');
+    if(bottom){
+      const names = bottom.slice(1).map(r => clean(r[1])).filter(Boolean);
+      const key = s => s.replace(/^\s*(㈜|㈔|[\(（\[【][^\)）\]】]*[\)）\]】])\s*/, '');   // ㈜·(주)·(재) 등은 정렬 시 무시
+      names.sort((a,b) => key(a).localeCompare(key(b), 'ko'));
+      tiers.push({label: BOTTOM_LABEL, names});
+    }
+
+    const list = tiers.filter(t => t.names.length);
+    if(!list.length) throw new Error('명단 없음');
+
+    const frag = document.createDocumentFragment();
+    list.forEach((t, i) => {
+      const sec = document.createElement('section');
+      sec.className = 'tier' + (i < MAJOR_TIERS && t.label !== BOTTOM_LABEL ? ' tier--major' : '');
+      sec.innerHTML = '<div class="tier-head"><h3></h3><span></span></div><ul class="donor-grid"></ul>';
+      sec.querySelector('h3').textContent = t.label;
+      sec.querySelector('span').textContent = t.names.length.toLocaleString() + COUNT_UNIT;
+      const ul = sec.querySelector('ul');
+      ul.setAttribute('aria-label', t.label);
+      t.names.forEach(n => {
+        const [main, ...rest] = n.split(/\n+/).map(s => s.trim()).filter(Boolean);
+        const li = document.createElement('li');
+        li.textContent = main;
+        if(rest.length){
+          const s = document.createElement('span');
+          s.className = 't';
+          s.textContent = rest.join(' ');
+          li.appendChild(s);
+        }
+        ul.appendChild(li);
+      });
+      frag.appendChild(sec);
+    });
+    wrap.appendChild(frag);
+    status.remove();
+  }catch(err){
+    console.error('기부자 명단 로드 실패:', err);
+    status.textContent = '명단을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
+  }
+})();
+</script>
+</body>
+</html>
