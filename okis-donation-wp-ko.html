@@ -1,0 +1,280 @@
+<!-- ===== OKIS 학교발전기금 섹션 (워드프레스 '사용자 정의 HTML' 블록에 통째로 붙여넣기) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Noto+Sans+JP:wght@400;600;700&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== OKIS 학교발전기금 · 기부자 명단 (워드프레스용, .okd 안에서만 적용) ===== */
+.okd{
+  --p1:#0d045f;--p2:#144697;--p3:#7dccf3;--orange:#ff571f;
+  --black:#1b1b1b;--gray:#6b7280;--navy-bg:#0d1140;--sub-navy:#9aa1bf;
+  --light-bg:#f3f6fb;--line:#e8ebf1;
+  --sans:'Noto Sans KR','Noto Sans JP',system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Hiragino Sans','Yu Gothic',sans-serif;
+  --title:'Inter','Noto Sans KR','Noto Sans JP',system-ui,sans-serif;
+  font-family:var(--sans);color:var(--black);line-height:1.5;
+  -webkit-font-smoothing:antialiased;text-align:left;
+}
+/* 테마 스타일 초기화 (이 블록 안에서만) */
+.okd *,.okd *::before,.okd *::after{box-sizing:border-box}
+.okd h2,.okd h3,.okd p,.okd ul,.okd li,.okd dl,.okd dt,.okd dd{
+  margin:0;padding:0;border:0;background:none;font-family:inherit;letter-spacing:normal;text-transform:none;
+}
+.okd ul{list-style:none}
+.okd li::before,.okd li::marker{content:none;display:none}
+.okd a{box-shadow:none;border:0}
+/* 섹션 폭을 화면 끝까지 넓히려면 바깥 div에 okd--full 클래스를 추가 */
+.okd.okd--full{overflow-x:hidden}
+.okd.okd--full .okd-sec{width:100vw;margin-left:calc(50% - 50vw)}
+.okd .okd-sec{padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:34px;overflow:hidden}
+.okd .okd-sec--navy{background:var(--navy-bg);padding-left:55px;padding-right:55px}
+.okd .okd-sec--light{background:var(--light-bg)}
+.okd .okd-sec--white{background:#fff}
+.okd .okd-sec-head{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.okd .okd-eyebrow{font-size:12px;line-height:18px;font-weight:700;text-transform:uppercase;color:var(--orange)}
+.okd .okd-sec-head h2{font-family:var(--title);font-size:30px;font-weight:700;line-height:1.2;color:var(--black)}
+.okd .okd-sec-head p{font-size:14px;color:var(--gray);margin-top:2px;word-break:keep-all}
+.okd .okd-sec--navy .okd-eyebrow{color:var(--p3)}
+.okd .okd-sec--navy h2{color:#fff}
+.okd .okd-sec--navy .okd-sec-head p{color:var(--sub-navy)}
+.okd [lang="ja"] .okd-tax-item p,.okd [lang="ja"] .okd-tax-note,.okd [lang="ja"] .okd-app-foot{line-break:strict}
+.okd .okd-inner{width:100%;max-width:870px}
+/* 계좌 안내 */
+.okd .okd-accounts{display:flex;gap:30px;align-items:stretch}
+.okd .okd-acc{flex:1 1 0;min-width:0;background:var(--p1);padding:20px;display:flex;flex-direction:column;gap:16px;font-size:14px}
+.okd .okd-acc h3{font-size:14px;font-weight:700;color:#fff;line-height:1.5}
+.okd .okd-acc dl{display:flex;flex-direction:column;gap:10px;font-weight:600;flex:1;justify-content:center}
+.okd .okd-acc dl div{display:flex;justify-content:space-between;gap:16px}
+.okd .okd-acc dt{color:var(--p3);flex-shrink:0;font-weight:600}
+.okd .okd-acc dd{color:#fff;text-align:right}
+.okd .okd-acc dd a{color:inherit;text-decoration:none}
+.okd .okd-acc dd a:hover{text-decoration:underline}
+/* 세제 우대 */
+.okd .okd-tax{display:flex;flex-direction:column;gap:24px}
+.okd .okd-tax-item{display:flex;flex-direction:column;gap:8px}
+.okd .okd-tax-item h3,.okd .okd-app-col h3{font-size:16px;font-weight:700;color:var(--p2);line-height:1.5}
+.okd .okd-tax-item p{font-size:14px;line-height:1.6;color:var(--black)}
+.okd .okd-tax-note{border-top:1px solid #d9dde5;padding-top:14px;font-size:14px;line-height:22px;color:var(--black)}
+.okd .okd-tax-note small{display:block;font-size:13px;color:var(--gray)}
+/* 신청서 */
+.okd .okd-app{display:flex;flex-direction:column;align-items:center;gap:24px}
+.okd .okd-app-row{display:flex;gap:34px;justify-content:center}
+.okd .okd-app-col{display:flex;flex-direction:column;align-items:center;gap:16px}
+.okd .okd-app-btn{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:400px;max-width:100%;height:50px;background:var(--p1);color:#fff;
+  font-size:16px;text-decoration:none;overflow:hidden;transition:background .2s;
+}
+.okd .okd-app-btn:hover,.okd .okd-app-btn:focus{color:#fff;background:var(--p2);text-decoration:none}
+.okd .okd-app-btn::after{content:"";position:absolute;right:0;top:50%;width:53px;height:1px;background:rgba(255,255,255,.7);transition:width .25s}
+.okd .okd-app-btn:hover::after{width:70px}
+.okd .okd-app-btn:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.okd .okd-app-foot{font-size:14px;text-align:center;color:var(--black)}
+/* 기부자 명단 */
+.okd .okd-donors{width:100%;max-width:860px;background:#fff;border-top:2px solid var(--p2)}
+.okd .okd-donor-status{padding:48px 20px;text-align:center;font-size:14px;color:var(--gray)}
+.okd .okd-tier + .okd-tier{border-top:2px solid var(--p2)}
+.okd .okd-tier-head{display:flex;align-items:baseline;justify-content:center;gap:8px;padding:22px 16px 14px;border-bottom:1px solid var(--line);background:#f8f9fc}
+.okd .okd-tier-head h3{font-size:16px;font-weight:700;color:var(--p2);line-height:1.4}
+.okd .okd-tier-head span{font-size:12px;color:var(--gray)}
+.okd .okd-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.okd .okd-grid li{
+  min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:13px;line-height:1.4;color:#333;border-bottom:1px solid var(--line);
+  padding:6px;text-align:center;word-break:keep-all;
+}
+.okd .okd-grid li .okd-t{display:block;font-size:11px;color:var(--gray);margin-top:2px}
+.okd .okd-tier--major .okd-grid{grid-template-columns:repeat(3,1fr)}
+.okd .okd-tier--major .okd-grid li{min-height:64px;padding:12px 8px;font-size:15px;font-weight:600;color:var(--black)}
+.okd .okd-tier--major .okd-grid li .okd-t{font-size:12px;font-weight:400}
+@media (max-width:900px){
+  .okd .okd-accounts{flex-direction:column;gap:16px}
+  .okd .okd-app-row{flex-direction:column;gap:24px;width:100%}
+  .okd .okd-app-col{width:100%}
+  .okd .okd-app-btn{width:100%}
+}
+@media (max-width:640px){
+  .okd .okd-sec--navy{padding-left:16px;padding-right:16px}
+  .okd .okd-sec-head h2{font-size:22px}
+  .okd .okd-sec-head p{font-size:13px}
+  .okd .okd-grid,.okd .okd-tier--major .okd-grid{grid-template-columns:repeat(2,1fr)}
+  .okd .okd-tier--major .okd-grid li{font-size:14px}
+  .okd .okd-acc dl div{flex-direction:column;gap:2px}
+  .okd .okd-acc dd{text-align:left;word-break:break-all}
+  .okd .okd-app-btn{font-size:15px;padding:0 60px 0 16px}
+}
+</style>
+<div class="okd" id="okd-root-ko" lang="ko">
+<!-- 함께하는 방법 -->
+<section class="okd-sec okd-sec--light" id="okd-take-part">
+  <div class="okd-sec-head">
+    <span class="okd-eyebrow">Take Part</span>
+    <h2>함께하는 방법 — 학교발전기금 안내</h2>
+    <p>기념행사와 함께 진행되는 OKIS 학교발전기금 계좌 정보입니다</p>
+  </div>
+  <div class="okd-inner okd-accounts">
+    <div class="okd-acc">
+      <h3>① 한국 내에서 송금</h3>
+      <dl>
+        <div><dt>계좌번호</dt><dd>신한은행 140-016-474118</dd></div>
+        <div><dt>계좌주명</dt><dd>(재)오케이배정장학재단</dd></div>
+        <div><dt>기부문의</dt><dd>02-3704-9962, 9724</dd></div>
+      </dl>
+    </div>
+    <div class="okd-acc" lang="ja">
+      <h3>② 日本国内からの送金</h3>
+      <dl>
+        <div><dt>銀行名</dt><dd>りそな銀行 萩ノ茶屋支店</dd></div>
+        <div><dt>口座番号</dt><dd>普通 0363451</dd></div>
+        <div><dt>口座名義</dt><dd>学校法人金剛学園 理事長 崔 潤</dd></div>
+        <div><dt>担当者</dt><dd>チョン・ジョンホン <a href="mailto:t-jeon@kongo-okis.com">t-jeon@kongo-okis.com</a></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+<!-- 세제 우대 -->
+<section class="okd-sec okd-sec--white" id="okd-tax">
+  <div class="okd-sec-head">
+    <span class="okd-eyebrow">Tax System</span>
+    <h2>세제상 우대에 대하여</h2>
+    <p>OKIS 학교발전기금 기부 시 받으실 수 있는 세제 혜택을 안내해 드립니다</p>
+  </div>
+  <div class="okd-inner okd-tax">
+    <div class="okd-tax-item">
+      <h3>법인의 경우</h3>
+      <p>법인으로부터의 기부금은 특정공익증진법인에 대한 기부금으로서 일정 한도액까지 일반 기부금과는 별도로 손금에 산입할 수 있습니다.</p>
+    </div>
+    <div class="okd-tax-item">
+      <h3>개인의 경우</h3>
+      <p>본 법인은 특정공익증진법인에 해당하므로, 본 법인에 대한 기부금은 일정한 요건을 충족하는 경우 소득세의 기부금 공제(소득공제) 대상이 됩니다.</p>
+    </div>
+    <p class="okd-tax-note">
+      기부금액은 총소득금액 등의 40% 상당액을 한도로 하며, 기부금액에서 2,000엔을 공제한 금액이 소득금액에서 공제됩니다.
+      <small>※ 세제상 우대조치를 받기 위해서는 확정신고 등 소정의 절차가 필요합니다.</small>
+    </p>
+  </div>
+</section>
+<!-- 기부금 신청서 -->
+<section class="okd-sec okd-sec--light" id="okd-application">
+  <div class="okd-sec-head">
+    <span class="okd-eyebrow">Application</span>
+    <h2>기부금 신청서</h2>
+    <p>기부 유형에 맞는 신청서를 내려받아 작성해 주세요</p>
+  </div>
+  <div class="okd-app">
+    <div class="okd-app-row">
+      <div class="okd-app-col">
+        <h3>법인의 경우</h3>
+        <!-- TODO: 실제 PDF 경로로 교체 -->
+        <a class="okd-app-btn" href="./pdf/application-corporate.pdf" target="_blank" rel="noopener">수증자 지정 기부금 신청서(PDF)</a>
+      </div>
+      <div class="okd-app-col">
+        <h3>개인의 경우</h3>
+        <!-- TODO: 실제 PDF 경로로 교체 -->
+        <a class="okd-app-btn" href="./pdf/application-individual.pdf" target="_blank" rel="noopener">특정 공익 증진 법인 기부 신청서(PDF)</a>
+      </div>
+    </div>
+    <p class="okd-app-foot">작성하신 후 우편으로 학교법인 금강학원 사무실로 보내주시기 바랍니다.</p>
+  </div>
+</section>
+<!-- 기부자 명단 -->
+<section class="okd-sec okd-sec--navy" id="okd-honors">
+  <div class="okd-sec-head">
+    <span class="okd-eyebrow">OKIS Honors Club</span>
+    <h2>80주년을 함께해주신 분들</h2>
+    <p>보내주신 따뜻한 마음, OKIS가 오래도록 기억하겠습니다</p>
+  </div>
+  <div class="okd-donors">
+    <div class="okd-tiers"></div>
+    <p class="okd-donor-status">명단을 불러오는 중입니다…</p>
+  </div>
+</section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+/* ===== 기부자 명단 — 엑셀 자동 로드 (구간별) =====
+ * EXCEL_URL : 미디어 라이브러리에 올린 donors.xlsx 주소
+ * '상단 명판' 시트 B열 = 구간 이름, '기부월 문구' 열 = 표시 이름 (엑셀 순서 유지)
+ * '하단 명판' 시트 B열 = 100만원 미만 구간 (가나다순)
+ * 셀 안 줄바꿈(Alt+Enter)은 "이름 / 직함" 두 줄로 표시
+ * ※ 워드프레스에서 스크립트가 깨지지 않도록 이 안에는 빈 줄을 넣지 마세요 */
+(function(){
+  var EXCEL_URL = '/wp-content/uploads/2026/09/donors.xlsx';
+  var TIER_LABELS = {'10억':'10억원 이상','1억':'1억원 이상','5천이상':'5천만원 이상','3천 이상':'3천만원 이상','1천 이상':'1천만원 이상','500 이상':'500만원 이상','100~500 미만':'100만원 이상'};
+  var BOTTOM_LABEL = '100만원 미만';
+  var COUNT_UNIT = '명';
+  var FAIL_TEXT = '명단을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
+  var MAJOR_TIERS = 6;   /* 위에서부터 몇 개 구간을 크게 보여줄지 */
+  var root = document.getElementById('okd-root-ko');
+  if(!root) return;
+  var wrap = root.querySelector('.okd-tiers');
+  var status = root.querySelector('.okd-donor-status');
+  function clean(v){ return String(v == null ? '' : v).replace(/\r/g,'').trim(); }
+  function sortKey(s){ return s.replace(/^\s*(㈜|㈔|[\(（\[【][^\)）\]】]*[\)）\]】])\s*/, ''); }
+  function el(tag, cls, text){ var e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+  function fail(err){ console.error('기부자 명단 로드 실패:', err); status.textContent = FAIL_TEXT; }
+  function render(tiers){
+    var list = tiers.filter(function(t){ return t.names.length; });
+    if(!list.length) return fail('명단 없음');
+    var frag = document.createDocumentFragment();
+    list.forEach(function(t, i){
+      var major = (MAJOR_TIERS > i) ? (t.label !== BOTTOM_LABEL) : false;
+      var sec = el('section', 'okd-tier' + (major ? ' okd-tier--major' : ''));
+      var head = el('div', 'okd-tier-head');
+      head.appendChild(el('h3', '', t.label));
+      head.appendChild(el('span', '', t.names.length.toLocaleString() + COUNT_UNIT));
+      sec.appendChild(head);
+      var ul = el('ul', 'okd-grid');
+      ul.setAttribute('aria-label', t.label);
+      t.names.forEach(function(n){
+        var parts = n.split(/\n+/).map(function(s){ return s.trim(); }).filter(Boolean);
+        var li = el('li', '', parts[0]);
+        if(parts.length > 1) li.appendChild(el('span', 'okd-t', parts.slice(1).join(' ')));
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+      frag.appendChild(sec);
+    });
+    wrap.appendChild(frag);
+    status.parentNode.removeChild(status);
+  }
+  function parse(buf){
+    var wb = XLSX.read(buf, {type:'array'});
+    function rowsOf(n){ return wb.Sheets[n] ? XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, defval:''}) : null; }
+    var tiers = [];
+    var top = rowsOf('상단 명판');
+    if(top){
+      var h = top.findIndex(function(r){ return r.some(function(c){ return clean(c) === '기부월 문구'; }); });
+      if(h === -1) throw new Error("'기부월 문구' 헤더를 찾지 못함");
+      var hdr = top[h].map(clean);
+      var nameCol = hdr.indexOf('기부월 문구');
+      var depCol = hdr.indexOf('입금내용');
+      var noCol = hdr.indexOf('No');
+      var tierCol = 1;   /* B열 */
+      var cur = null;
+      top.slice(h + 1).forEach(function(r){
+        var t = clean(r[tierCol]).replace(/\s*\n\s*/g, ' ');
+        if(t){ cur = {label: TIER_LABELS[t] || t, names: []}; tiers.push(cur); }
+        var name = clean(r[nameCol]) || clean(r[depCol]);
+        if(!cur) return;
+        if(!name) return;
+        if(noCol !== -1) { if(clean(r[noCol]) === '') return; }   /* 번호 없는 메모 줄 */
+        cur.names.push(name);
+      });
+    }
+    var bottom = rowsOf('하단 명판');
+    if(bottom){
+      var names = bottom.slice(1).map(function(r){ return clean(r[1]); }).filter(Boolean);
+      names.sort(function(a, b){ return sortKey(a).localeCompare(sortKey(b), 'ko'); });
+      tiers.push({label: BOTTOM_LABEL, names: names});
+    }
+    return tiers;
+  }
+  function start(){
+    if(typeof XLSX === 'undefined') return fail('SheetJS 로드 실패');
+    fetch(EXCEL_URL + '?v=' + Date.now(), {cache:'no-store'})
+      .then(function(res){ if(!res.ok) throw new Error('HTTP ' + res.status); return res.arrayBuffer(); })
+      .then(function(buf){ render(parse(buf)); })
+      .catch(fail);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
