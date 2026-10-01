@@ -1,25 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <script>
-/* 브라우저 언어가 일본어면 일본어 페이지로 이동.
-   ?lang=ko 로 들어오거나 한국어를 직접 선택한 적이 있으면 이동하지 않음 */
-(function () {
-  try {
-    var q = new URLSearchParams(location.search).get('lang');
-    if (q === 'ko') { localStorage.setItem('okis-lang', 'ko'); return; }
-    if (localStorage.getItem('okis-lang') === 'ko') return;
-    var lang = ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
-    if (lang.indexOf('ja') === 0) location.replace('index_jp.html' + location.hash);
-  } catch (e) {}
-})();
+/* 일본어 페이지에 들어오면 한국어 고정 선택을 해제 */
+try { localStorage.removeItem('okis-lang'); } catch (e) {}
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta property="og:image" content="https://okgroup-uxui.github.io/okis/01/img/og-image.png">
 <meta property="og:url" content="https://okgroup-uxui.github.io/okis/01/">
-<meta property="og:description" content="2026년 10월 2일 ~ 2026년 10월 3일">
-<title>오사카 코리안 인터내셔널 스쿨 80주년 행사에 초대합니다.</title>
+<meta property="og:description" content="2026年10月2日 ~ 2026年10月3日">
+<title>大阪コリアンインターナショナルスクール 創立80周年記念行事にご招待申し上げます。</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -144,7 +135,7 @@
 
   /* --- 프로그램 --- */
   .program-section{background:var(--bg-alt); text-align:center;}
-  .ptable{border-collapse:collapse; width: 100%; max-width: 440px; margin:0 auto; border:1px solid var(--line);}
+  .ptable{border-collapse:collapse; margin:0 auto; max-width: 440px; border:1px solid var(--line); width: 100%;}
   .ptable th, .ptable td{padding:20px; text-align:center;}
   .ptable th{color:#fff; font-weight:600; font-size:clamp(14px,calc(var(--cqw) * 3.6),15px); letter-spacing:-.2px;}
   .ptable th.day1{background:#144697;}
@@ -199,7 +190,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.13.0/build/player/lottie.min.js"></script>
 </head>
 <body>
-<nav class="lang-switch" aria-label="언어 선택"><a href="index.html?lang=ko" lang="ko" aria-current="true">한국어</a><a href="index_jp.html" lang="ja">日本語</a></nav>
+<nav class="lang-switch" aria-label="言語選択"><a href="index.html?lang=ko" lang="ko">한국어</a><a href="index_jp.html" lang="ja" aria-current="true">日本語</a></nav>
 <div id="appFrame">
 <!-- ============ SCROLL-OPEN ENVELOPE INTRO ============ -->
 <div id="introSpacer">
@@ -213,12 +204,12 @@
       <div class="hero-content">
         <div class="hero-line"></div>
         <div class="mark"><img src="img/img_mark.png" alt=""/></div>
-        <div class="school-name">오사카 코리안 인터내셔널 스쿨</div>
-        <h1 class="serif"><span class="n80">80</span><span class="l1">주년 행사에</span><span class="l2">초대합니다</span></h1>
+        <div class="school-name">大阪コリアンインターナショナルスクール</div>
+        <h1 class="serif"><span class="n80">創立 80</span><span class="l1">周年記念行事に</span><span class="l2">ご招待申し上げます</span></h1>
         <div class="ornament-row"><img src="img/img_flower.png" alt=""/></div>
         <div class="date">2026.10.02 - 03</div>
-        <div class="addr">2 Chome-6-10 Nankokita, Suminoe Ward,<br>Osaka, 559-0034 일본</div>
-        <div class="tagline">개교 80주년을 축하하는<br>뜻깊은 자리에 함께해 주세요</div>
+        <div class="addr">〒559-0034 大阪府大阪市住之江区南港北2丁目6-10</div>
+        <div class="tagline">創立80周年を迎える記念すべきひとときを、<br>ぜひご一緒ください。</div>
       </div>
     </div>
     <div id="confetti"></div>
@@ -229,26 +220,27 @@
 <div id="content">
   <section class="greeting reveal">
     <p>
-      학교법인 금강학원이 뜻깊은 창립 80주년을 맞아<br>
-      교명을 오사카 코리안 인터내셔널 스쿨로<br>
-      새롭게 변경하였습니다.<br>
-      그동안 아낌없는 성원과 격려를 보내주신 귀한 분들을 모시고 감사의 마음을 나누는 자리를 마련하였습니다.<br>
-      함께하시어 새로운 출발을 축복해 주시고<br>
-      자리를 빛내주시기 바랍니다.
+      学校法人金剛学園は、このたび創立80周年という大きな節目を迎え、<br>
+      校名を「大阪コリアンインターナショナルスクール」へと改称し、<br>
+      新たな一歩を踏み出すこととなります。<br>
+      これまで長きにわたり温かいご支援とご厚情を賜りました皆様への感謝の気持ちを込め、創立80周年記念行事を開催いたします。<br>
+      ご多用の折とは存じますが、ぜひご臨席賜り、<br>
+      本校の新たな門出をともにお祝いくださいますよう心よりお願い申し上げます。
+
     </p>
-    <div class="signature"><span>오사카 코리안 인터내셔널 스쿨 이사장</span><b>최 윤</b></div>
+    <div class="signature"><span>大阪コリアンインターナショナルスクール　理事長</span><b>崔 潤</b></div>
   </section>
 
   <section class="date-section reveal">
-    <div class="section-title">날짜</div>
+    <div class="section-title">日付</div>
     <div class="date-range">2026.10.02 - 03</div>
-    <div class="cal-head"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div>
+    <div class="cal-head"><div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div></div>
     <div class="cal-grid" id="calGrid"></div>
   </section>
 
   <section class="venue-section reveal">
-    <div class="section-title">장소</div>
-    <div class="venue-name">오사카 코리안 인터내셔널 스쿨</div>
+    <div class="section-title">会場</div>
+    <div class="venue-name">大阪コリアンインターナショナルスクール</div>
     <div class="map-box">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.6057634043336!2d135.40443867657822!3d34.63940167294152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e9a989d4efed%3A0x46028f0e418519ef!2z7Jik7IKs7Lm06riI6rCV7J247YSw64K07IWU64SQ7IaM44O77KSR44O76rOg65Ox7ZWZ6rWQ!5e0!3m2!1sko!2skr!4v1789429803718!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
@@ -260,7 +252,7 @@
   </section>
 
   <section class="program-section reveal">
-    <div class="section-title">프로그램</div>
+    <div class="section-title">プログラム</div>
 
     <table class="ptable">
       <colgroup>
@@ -268,43 +260,43 @@
         <col style="width: 50%;">
       </colgroup>
       <thead>
-        <tr><th class="day1">10.02(금)</th><th class="day2">10.03(토)</th></tr>
+        <tr><th class="day1">10.02(金)</th><th class="day2">10.03(土)</th></tr>
       </thead>
       <tbody>
         <tr>
-          <td class="day1"><div class="pt-time">09:15~10:15</div><div class="pt-title">중∙고등 발표1</div></td>
-          <td class="day2"><div class="pt-time">10:00~11:30</div><div class="pt-title">기념식</div></td>
+          <td class="day1"><div class="pt-time">09:15~10:15</div><div class="pt-title">中·高等発表1</div></td>
+          <td class="day2"><div class="pt-time">10:00~11:30</div><div class="pt-title">記念式</div></td>
         </tr>
         <tr>
-          <td class="day1"><div class="pt-time">10:30~11:30</div><div class="pt-title">소학교 발표1</div></td>
-          <td class="day2"><div class="pt-time">12:00~13:40</div><div class="pt-title">중∙고등 동아리 발표</div></td>
+          <td class="day1"><div class="pt-time">10:30~11:30</div><div class="pt-title">小学校発表1</div></td>
+          <td class="day2"><div class="pt-time">12:00~13:40</div><div class="pt-title">中·高クラブ発表</div></td>
         </tr>
         <tr>
-          <td class="day1"><div class="pt-time">12:20~13:20</div><div class="pt-title">중∙고등 발표2</div></td>
-          <td class="day2"><div class="pt-time">13:50~15:00</div><div class="pt-title">노래 대회</div></td>
+          <td class="day1"><div class="pt-time">12:20~13:20</div><div class="pt-title">中·高等発表2</div></td>
+          <td class="day2"><div class="pt-time">13:50~15:00</div><div class="pt-title">歌唱大会</div></td>
         </tr>
         <tr>
-          <td class="day1"><div class="pt-time">13:35~14:15</div><div class="pt-title">소학교 발표2</div></td>
-          <td class="day2"><div class="pt-time">15:20~16:45</div><div class="pt-title">중∙고등 장기자랑</div></td>
+          <td class="day1"><div class="pt-time">13:35~14:15</div><div class="pt-title">小学校発表2</div></td>
+          <td class="day2"><div class="pt-time">15:20~16:45</div><div class="pt-title">中·高かくし芸大会</div></td>
         </tr>
         <tr>
-          <td class="day1"><div class="pt-time">14:15~14:25</div><div class="pt-title">교가 제창</div></td>
-          <td class="day2"><div class="pt-time">17:00~17:40</div><div class="pt-title">추첨회</div></td>
+          <td class="day1"><div class="pt-time">14:15~14:25</div><div class="pt-title">校歌斉唱</div></td>
+          <td class="day2"><div class="pt-time">17:00~17:40</div><div class="pt-title">抽選会</div></td>
         </tr>
         <tr>
           <td class="day1"><div class="pt-time">15:20~16:30</div><div class="pt-title">OKIStar ⭐️<br>Festival</div></td>
-          <td class="day2"><div class="pt-time">17:40~17:50</div><div class="pt-title">교가 제창</div></td>
+          <td class="day2"><div class="pt-time">17:40~17:50</div><div class="pt-title">校歌斉唱</div></td>
         </tr>
       </tbody>
     </table>
     <div class="detail-toggle-wrap">
-      <a class="detail-toggle" href="https://www.kongogakuen.ed.jp/kr/okis_80th/" target="_blank" rel="noopener">자세한 일정보기</a>
+      <a class="detail-toggle" href="https://www.kongogakuen.ed.jp/okis_80th/" target="_blank" rel="noopener">詳細日程を見る</a>
     </div>
-    <div class="pg-note">※ 상기 일정은 진행 상황에 따라 변경될 수 있습니다.</div>
+    <div class="pg-note">※上記日程は進行状況により変更される場合があります。</div>
   </section>
 
   <section class="gallery-section reveal">
-    <div class="section-title">갤러리</div>
+    <div class="section-title">ギャラリー</div>
     <div class="gallery-ornament"><img src="img/img_flower.png" alt=""/></div>
     <div class="gallery-grid">
       <div class="g-item"><img src="img/img_01.JPG" alt=""/></div>
@@ -315,33 +307,25 @@
       <div class="g-item"><img src="img/img_06.png" alt=""/></div>
     </div>
   </section>
-  <footer class="reveal">오사카 코리안 인터내셔널 스쿨 80주년 기념 행사<br>2026.10.02 – 03</footer>
+  <footer class="reveal">大阪コリアンインターナショナルスクール 創立80周年記念行事<br>2026.10.02 – 03</footer>
 </div>
 
 </div><!-- /#appFrame -->
 
 <script>
-  // Keep --cqw (1% of the app frame's own width) accurate on load/resize/orientation
-  // change. This does the same job as CSS container query units (cqw) but works on
-  // every browser, including older mobile browsers that don't support container
-  // queries yet — which is what was causing the layout to break on some phones.
   (function(){
     const frame = document.getElementById('appFrame');
     const envelope = document.getElementById('envelopeScreen');
     const heroContent = document.querySelector('.hero-content');
     const bottomCard = document.querySelector('.card .bottom');
-    // Real dimensions of img_main_bottom.png and where the logo mark sits inside
-    // it (measured directly from the file) — used to keep the "settle" shift
-    // from ever pushing the logo's lower half (the "80th ANNIVERSARY" text)
-    // past the envelope's clipped edge.
     const BOTTOM_IMG_W = 1080, BOTTOM_IMG_H = 1320, LOGO_BOTTOM_PX = 729;
     function setCqw(){
       frame.style.setProperty('--cqw', (frame.getBoundingClientRect().width / 100) + 'px');
       envelope.style.setProperty('--cqw', (envelope.getBoundingClientRect().width / 100) + 'px');
     }
     function fitHero(){
-      heroContent.style.transform = 'none'; // reset before measuring natural height
-      const available = envelope.clientHeight * 0.60; // safe zone above where the diamond band art begins
+      heroContent.style.transform = 'none';
+      const available = envelope.clientHeight * 0.60;
       const needed = heroContent.scrollHeight;
       if(needed > available){
         heroContent.style.transform = `scale(${available / needed})`;
@@ -349,10 +333,10 @@
     }
     function fitBottomShift(){
       const boxW = bottomCard.clientWidth;
-      const boxH = bottomCard.clientHeight; // natural height now (no cropping) — image's own aspect ratio at this width
+      const boxH = bottomCard.clientHeight; 
       const scale = boxW / BOTTOM_IMG_W;
-      const logoBottomPx = LOGO_BOTTOM_PX * scale; // logo's bottom edge, measured from the top of this image
-      const maxShift = boxH - logoBottomPx; // don't push the logo past the envelope's clipped bottom edge
+      const logoBottomPx = LOGO_BOTTOM_PX * scale; 
+      const maxShift = boxH - logoBottomPx; 
       const shift = Math.max(0, Math.min(148, maxShift));
       envelope.style.setProperty('--bottom-shift', shift + 'px');
     }
@@ -361,7 +345,7 @@
     window.addEventListener('resize', update);
     window.addEventListener('orientationchange', update);
     if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(update); // re-fit once web fonts swap in
+      document.fonts.ready.then(update); 
     }
   })();
 
@@ -378,13 +362,8 @@
     calGrid.appendChild(el);
   }
 
-  // ---- auto-play envelope open (once, on load) ----
-  // .top swings open like a real flap (CSS transition + .opened class),
-  // .bottom settles 148px down, both revealing the real .hero behind them.
   const envelopeScreen = document.getElementById('envelopeScreen');
   const cardTop = document.querySelector('.card .top');
-
-  // confetti burst, timed to fire the moment the envelope finishes opening
   const confettiAnim = (typeof lottie !== 'undefined')
     ? lottie.loadAnimation({
         container: document.getElementById('confetti'),
