@@ -382,43 +382,35 @@
     flex-direction: column;
     align-items: center;
   }
-  .pg-table {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(7, auto);
-    grid-auto-flow: column;
-    width: 100%;
-    max-width: 440px;
+  .pg-list { display: flex; flex-direction: column; gap: 32px; width: 100%; max-width: 440px; }
+  .pg-card { background: #fff; border-radius: 16px; overflow: hidden; }
+  .pg-head1, .pg-head2 { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 16px; text-align: center; color: #fff; }
+  .pg-head1 { background: #1f53a7; }
+  .pg-head2 { background: var(--point1); }
+  .pg-date { font-size: 16px; font-weight: 900; line-height: 22px; }
+  .pg-sub { font-size: 12px; font-weight: 400; line-height: 16px; color: rgba(255,255,255,0.7); }
+  .pg-body { padding: 8px 16px; }
+  .pg-row { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+  .pg-row + .pg-row { margin-top: 8px; }
+  .pg-row + .pg-row::before {
+    content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 9px;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='9' viewBox='0 0 18 9'%3E%3Cpath d='M0 4L9 8L18 4' fill='none' stroke='%23EAEEF4'/%3E%3C/svg%3E") center top / 18px 9px no-repeat,
+      linear-gradient(#eaeef4, #eaeef4) left 3.5px / calc(50% - 9px) 1px no-repeat,
+      linear-gradient(#eaeef4, #eaeef4) right 3.5px / calc(50% - 9px) 1px no-repeat;
   }
-  .pg-day {
-    padding: 12px 8px;
-    color: #fff;
-    font-family: "Inter", "Noto Sans KR", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: normal;
-    text-align: center;
-    border-radius: 16px 16px 0 0;
+  .pg-time1, .pg-time2 {
+    flex: 0 0 72px; width: 72px; height: 72px; border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 14px; line-height: 1.45; white-space: nowrap;
   }
-  .pg-day.d1 { background: #144697; }
-  .pg-day.d2 { background: var(--point1); }
-  .pg-cell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 20px 8px;
-    text-align: center;
-    line-height: normal;
-    word-break: keep-all;
-    border-bottom: 1px solid var(--line1);
-  }
-  .pg-cell.c1 { background: #fff; }
-  .pg-cell.c2 { background: #e7f5ff; }
-  .pg-cell.last { border-bottom: none; border-radius: 0 0 16px 16px; }
-  .pg-time { font-size: 14px; font-weight: 400; color: #6b7280; }
-  .pg-name { font-size: 16px; font-weight: 500; color: var(--black1); letter-spacing: -0.32px; }
+  .pg-time1 { background: #ecf7ff; color: #144697; }
+  .pg-time2 { background: #f6f5fe; color: var(--point1); }
+  .pg-time1 b, .pg-time2 b { font-weight: 500; }
+  .pg-time1 span, .pg-time2 span { font-weight: 400; margin: -2px 0; }
+  .pg-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; text-align: left; overflow-wrap: anywhere; word-break: keep-all; }
+  .pg-name { font-size: 16px; font-weight: 700; color: var(--black1); letter-spacing: -0.32px; line-height: 1.45; }
+  .pg-desc { font-size: 14px; font-weight: 400; color: #6b7280; line-height: 1.45; }
 
 
   .pg-detail-wrap { text-align: center; margin-top: 24px; }
@@ -686,23 +678,33 @@
   <!-- 02 PROGRAM -->
   <section class="section-mid">
     <div class="pill reveal" style="margin-bottom:40px;"><span>PROGRAM</span></div>
-    <div class="pg-table reveal">
-      <!-- 10.02(금) -->
-      <div class="pg-day d1">10.02(금)</div>
-      <div class="pg-cell c1"><span class="pg-time">09:15~10:15</span><span class="pg-name">중∙고등 발표1</span></div>
-      <div class="pg-cell c1"><span class="pg-time">10:30~11:30</span><span class="pg-name">소학교 발표1</span></div>
-      <div class="pg-cell c1"><span class="pg-time">12:20~13:20</span><span class="pg-name">중∙고등 발표2</span></div>
-      <div class="pg-cell c1"><span class="pg-time">13:35~14:15</span><span class="pg-name">소학교 발표2</span></div>
-      <div class="pg-cell c1"><span class="pg-time">14:15~14:25</span><span class="pg-name">교가 제창</span></div>
-      <div class="pg-cell c1 last"><span class="pg-time">15:20~16:30</span><span class="pg-name">OKIStar ⭐️<br>Festival</span></div>
-      <!-- 10.03(토) -->
-      <div class="pg-day d2">10.03(토)</div>
-      <div class="pg-cell c2"><span class="pg-time">10:00~11:30</span><span class="pg-name">기념식</span></div>
-      <div class="pg-cell c2"><span class="pg-time">12:00~13:40</span><span class="pg-name">중∙고등 동아리 발표</span></div>
-      <div class="pg-cell c2"><span class="pg-time">13:50~15:00</span><span class="pg-name">노래 대회</span></div>
-      <div class="pg-cell c2"><span class="pg-time">15:20~16:45</span><span class="pg-name">중∙고등 장기자랑</span></div>
-      <div class="pg-cell c2"><span class="pg-time">17:00~17:40</span><span class="pg-name">추첨회</span></div>
-      <div class="pg-cell c2 last"><span class="pg-time">17:40~17:50</span><span class="pg-name">교가 제창</span></div>
+    <div class="pg-list reveal">
+      <div class="pg-card">
+        <div class="pg-head1"><div class="pg-date">10.02(금)</div><div class="pg-sub">초·중·고 생활발표회 &amp; 중·고 문화제</div></div>
+        <div class="pg-body">
+          <div class="pg-row"><div class="pg-time1"><b>09:15</b><span>~</span><b>10:15</b></div><div class="pg-info"><div class="pg-name">중·고등발표 ①</div><div class="pg-desc">고2·중1·고1 무대 발표</div></div></div>
+          <div class="pg-row"><div class="pg-time1"><b>10:30</b><span>~</span><b>11:30</b></div><div class="pg-info"><div class="pg-name">소학교발표 ①</div><div class="pg-desc">소3·소1·소2 생활발표회</div></div></div>
+          <div class="pg-row"><div class="pg-time1"><b>12:20</b><span>~</span><b>13:20</b></div><div class="pg-info"><div class="pg-name">중·고등발표 ②</div><div class="pg-desc">중2·중3·고3 무대 발표</div></div></div>
+          <div class="pg-row"><div class="pg-time1"><b>13:35</b><span>~</span><b>14:15</b></div><div class="pg-info"><div class="pg-name">소학교발표 ②</div><div class="pg-desc">소4·소5 생활발표회</div></div></div>
+          <div class="pg-row"><div class="pg-time1"><b>14:15</b><span>~</span><b>14:25</b></div><div class="pg-info"><div class="pg-name">교가 제창</div><div class="pg-desc">소·중·고 합동합창단의 교가 제창</div></div></div>
+          <div class="pg-row"><div class="pg-time1"><b>15:20</b><span>~</span><b>16:30</b></div><div class="pg-info"><div class="pg-name">OKIStar ⭐️ Festival</div><div class="pg-desc">학생회 퍼포먼스, 담임 프로듀스, 티셔츠 콘테스트, 커플 콘테스트 등</div></div></div>
+        </div>
+      </div>
+      <div class="pg-card">
+        <div class="pg-head2"><div class="pg-date">10월 3일(토)</div><div class="pg-sub">창립 80주년 기념식<br>초6 생활발표회 &amp; 중·고 문화제 &amp; 동아리 발표</div></div>
+        <div class="pg-body">
+          <div class="pg-row"><div class="pg-time2"><b>09:30</b><span>~</span><b>10:00</b></div><div class="pg-info"><div class="pg-name">행사 준비</div><div class="pg-desc">행사 준비 착석 및 행사 준비</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>10:00</b><span>~</span><b>10:30</b></div><div class="pg-info"><div class="pg-name">소학교발표</div><div class="pg-desc">창립 80주년 기념 오프닝 공연(소6 연극)</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>10:30</b><span>~</span><b>11:30</b></div><div class="pg-info"><div class="pg-name">기념식</div><div class="pg-desc">창립 80주년 기념식</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>11:30</b><span>~</span><b>12:00</b></div><div class="pg-info"><div class="pg-name">금강마당 Festival 준비</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>12:00</b><span>~</span><b>12:30</b></div><div class="pg-info"><div class="pg-name">초청공연 1</div><div class="pg-desc">동민 동지사대학교 댄스팀</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>12:30</b><span>~</span><b>13:50</b></div><div class="pg-info"><div class="pg-name">중·고 동아리 발표회</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>13:50</b><span>~</span><b>15:00</b></div><div class="pg-info"><div class="pg-name">노래 대회</div><div class="pg-desc">소학교 가라오케 대회</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>15:10</b><span>~</span><b>16:00</b></div><div class="pg-info"><div class="pg-name">중·고 장기자랑</div><div class="pg-desc">미성년의 주장 / 중고 장기자랑 9팀</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>16:00</b><span>~</span><b>16:45</b></div><div class="pg-info"><div class="pg-name">초청공연 2 / 초청공연 3</div><div class="pg-desc">마사야 / 이모티엠</div></div></div>
+          <div class="pg-row"><div class="pg-time2"><b>17:00</b><span>~</span><b>18:00</b></div><div class="pg-info"><div class="pg-name">추첨회 🎁</div><div class="pg-desc">경품 추첨</div></div></div>
+        </div>
+      </div>
     </div>
     <div class="pg-detail-wrap reveal">
       <a class="pg-detail" href="https://www.kongogakuen.ed.jp/kr/okis_80th/" target="_blank" rel="noopener">자세한 일정보기</a>
