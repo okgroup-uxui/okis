@@ -13,7 +13,7 @@ try { localStorage.removeItem('okis-lang'); } catch (e) {}
 <title>大阪コリアンインターナショナルスクール 創立80周年記念行事にご招待申し上げます。</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --accent:#0d045f;      /* 포인트1 */
@@ -135,16 +135,30 @@ try { localStorage.removeItem('okis-lang'); } catch (e) {}
 
   /* --- 프로그램 --- */
   .program-section{background:var(--bg-alt); text-align:center;}
-  .ptable{border-collapse:collapse; margin:0 auto; max-width: 440px; border:1px solid var(--line); width: 100%;}
-  .ptable th, .ptable td{padding:20px; text-align:center;}
-  .ptable th{color:#fff; font-weight:600; font-size:clamp(14px,calc(var(--cqw) * 3.6),15px); letter-spacing:-.2px;}
-  .ptable th.day1{background:#144697;}
-  .ptable th.day2{background:var(--accent);}
-  .ptable td.day1{background:#fff; border-bottom:1px dashed var(--line);}
-  .ptable td.day2{background:#edf5ff; border-bottom:1px dashed #d4deed;}
-  .ptable tr:last-child td{border-bottom:none;}
-  .pt-time{font-size:14px; color:var(--ink-soft); margin-bottom:4px; line-height:1.3;}
-  .pt-title{font-size:15px; font-weight:600; color:var(--ink); letter-spacing:-.3px; line-height:1.3;}
+  .program-section .section-title{margin-bottom:40px;}
+  .pg-list{display:flex; flex-direction:column; gap:32px; width:100%; max-width:440px; margin:0 auto; text-align:left;}
+  .pg-day{background:#fff; box-shadow:0 4px 10px rgba(0,0,0,.1);}
+  .pg-head1, .pg-head2{display:flex; flex-direction:column; align-items:center; gap:4px; padding:10px 16px; text-align:center;}
+  .pg-head1{background:#1f53a7;}
+  .pg-head2{background:var(--accent);}
+  .pg-date{font-size:16px; font-weight:500; line-height:22px; color:#fff;}
+  .pg-sub{font-size:12px; font-weight:300; line-height:16px; color:rgba(255,255,255,.7);}
+  .pg-body{padding:8px 16px;}
+  .pg-row{position:relative; display:flex; align-items:center; gap:12px; padding:10px 0;}
+  .pg-row + .pg-row{margin-top:8px;}
+  .pg-row + .pg-row::before{
+    content:''; position:absolute; left:0; right:0; top:-8px; height:9px;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='9' viewBox='0 0 18 9'%3E%3Cpath d='M0 4L9 8L18 4' fill='none' stroke='%23EAEEF4'/%3E%3C/svg%3E") center top/18px 9px no-repeat,
+      linear-gradient(#eaeef4,#eaeef4) left 3.5px/calc(50% - 9px) 1px no-repeat,
+      linear-gradient(#eaeef4,#eaeef4) right 3.5px/calc(50% - 9px) 1px no-repeat;
+  }
+  .pg-time{flex:0 0 72px; width:72px; height:72px; background:#f6f7f9; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:14px; line-height:1.45; color:var(--accent); white-space:nowrap;}
+  .pg-time b{font-weight:500;}
+  .pg-time span{font-weight:400; margin:-2px 0;}
+  .pg-info{flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; overflow-wrap:anywhere;}
+  .pg-name{font-size:16px; font-weight:600; color:var(--ink); letter-spacing:-.32px; line-height:1.45;}
+  .pg-desc{font-size:14px; font-weight:400; color:var(--ink-soft); line-height:1.45;}
   .pg-note{margin-top:14px; font-size:clamp(11px,calc(var(--cqw) * 2.9),12px); color:var(--ink-soft);}
   .detail-toggle-wrap{text-align:center; margin-top:16px;}
   .detail-toggle{
@@ -290,41 +304,34 @@ try { localStorage.removeItem('okis-lang'); } catch (e) {}
   <section class="program-section reveal">
     <div class="section-title">プログラム</div>
 
-    <table class="ptable">
-      <colgroup>
-        <col style="width: 50%;">
-        <col style="width: 50%;">
-      </colgroup>
-      <thead>
-        <tr><th class="day1">10.02(金)</th><th class="day2">10.03(土)</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="day1"><div class="pt-time">09:15~10:15</div><div class="pt-title">中·高等発表1</div></td>
-          <td class="day2"><div class="pt-time">10:00~11:30</div><div class="pt-title">記念式</div></td>
-        </tr>
-        <tr>
-          <td class="day1"><div class="pt-time">10:30~11:30</div><div class="pt-title">小学校発表1</div></td>
-          <td class="day2"><div class="pt-time">12:00~13:40</div><div class="pt-title">中·高クラブ発表</div></td>
-        </tr>
-        <tr>
-          <td class="day1"><div class="pt-time">12:20~13:20</div><div class="pt-title">中·高等発表2</div></td>
-          <td class="day2"><div class="pt-time">13:50~15:00</div><div class="pt-title">歌唱大会</div></td>
-        </tr>
-        <tr>
-          <td class="day1"><div class="pt-time">13:35~14:15</div><div class="pt-title">小学校発表2</div></td>
-          <td class="day2"><div class="pt-time">15:20~16:45</div><div class="pt-title">中·高かくし芸大会</div></td>
-        </tr>
-        <tr>
-          <td class="day1"><div class="pt-time">14:15~14:25</div><div class="pt-title">校歌斉唱</div></td>
-          <td class="day2"><div class="pt-time">17:00~17:40</div><div class="pt-title">抽選会</div></td>
-        </tr>
-        <tr>
-          <td class="day1"><div class="pt-time">15:20~16:30</div><div class="pt-title">OKIStar ⭐️<br>Festival</div></td>
-          <td class="day2"><div class="pt-time">17:40~17:50</div><div class="pt-title">校歌斉唱</div></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="pg-list">
+      <div class="pg-day">
+        <div class="pg-head1"><div class="pg-date">10.02(金)</div><div class="pg-sub">小・中・高 生活発表会 &amp; 中・高 文化祭</div></div>
+        <div class="pg-body">
+          <div class="pg-row"><div class="pg-time"><b>09:15</b><span>~</span><b>10:15</b></div><div class="pg-info"><div class="pg-name">中高の部①</div><div class="pg-desc">高２・中１・高１ 舞台発表</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>10:30</b><span>~</span><b>11:30</b></div><div class="pg-info"><div class="pg-name">小学の部①</div><div class="pg-desc">小３・小１・小２ 生活発表会</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>12:20</b><span>~</span><b>13:20</b></div><div class="pg-info"><div class="pg-name">中高の部②</div><div class="pg-desc">中２・中３・高３ 舞台発表</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>13:35</b><span>~</span><b>14:15</b></div><div class="pg-info"><div class="pg-name">小学の部②</div><div class="pg-desc">小４・小５ 生活発表会</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>14:15</b><span>~</span><b>14:25</b></div><div class="pg-info"><div class="pg-name">校歌斉唱</div><div class="pg-desc">小・中・高 合同合唱団による校歌斉唱</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>15:20</b><span>~</span><b>16:30</b></div><div class="pg-info"><div class="pg-name">OKIStar ⭐️ Festival</div><div class="pg-desc">生徒会パフォーマンス、担任プロデュース、Tシャツコンテスト、カップルコンテストなど</div></div></div>
+        </div>
+      </div>
+      <div class="pg-day">
+        <div class="pg-head2"><div class="pg-date">10月3日(土)</div><div class="pg-sub">創立80周年記念式典<br>小6 学習発表会 &amp; 中・高 文化祭 &amp; クラブ発表</div></div>
+        <div class="pg-body">
+          <div class="pg-row"><div class="pg-time"><b>09:30</b><span>~</span><b>10:00</b></div><div class="pg-info"><div class="pg-name">開場・式典準備</div><div class="pg-desc">着席・式典準備</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>10:00</b><span>~</span><b>10:30</b></div><div class="pg-info"><div class="pg-name">小学校発表</div><div class="pg-desc">創立80周年記念オープニングステージ（小6 学習発表会）</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>10:30</b><span>~</span><b>11:30</b></div><div class="pg-info"><div class="pg-name">記念式典</div><div class="pg-desc">創立80周年記念式典</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>11:30</b><span>~</span><b>12:00</b></div><div class="pg-info"><div class="pg-name">金剛マダン Festival 準備</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>12:00</b><span>~</span><b>12:30</b></div><div class="pg-info"><div class="pg-name">招待公演 ①</div><div class="pg-desc">同志社大学ダンスチーム「トンミン」</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>12:30</b><span>~</span><b>13:50</b></div><div class="pg-info"><div class="pg-name">中・高クラブ発表会</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>13:50</b><span>~</span><b>15:00</b></div><div class="pg-info"><div class="pg-name">カラオケ大会</div><div class="pg-desc">小学校カラオケ大会</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>15:10</b><span>~</span><b>16:00</b></div><div class="pg-info"><div class="pg-name">中・高 特技発表</div><div class="pg-desc">未成年の主張 ／ 中・高特技発表（9組）</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>16:00</b><span>~</span><b>16:45</b></div><div class="pg-info"><div class="pg-name">招待公演 ② ／ 招待公演 ③</div><div class="pg-desc">MASAYA ／ EMOTI:M</div></div></div>
+          <div class="pg-row"><div class="pg-time"><b>17:00</b><span>~</span><b>18:00</b></div><div class="pg-info"><div class="pg-name">抽選会</div><div class="pg-desc">景品抽選</div></div></div>
+        </div>
+      </div>
+    </div>
     <div class="detail-toggle-wrap">
       <a class="detail-toggle" href="https://www.kongogakuen.ed.jp/okis_80th/" target="_blank" rel="noopener">詳細日程を見る</a>
     </div>
