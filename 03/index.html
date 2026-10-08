@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>OKIS 기부자 월</title>
-<!-- OG: og:url, og:image는 실제 배포 주소(절대경로)로 바꿔주세요 -->
 <meta name="description" content="기부자님의 소중한 이름을 새겨넣었습니다.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="OKIS 기부자 월">
@@ -14,47 +13,113 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0e065e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400&display=swap" rel="stylesheet">
 <style>
+  /* Noto Serif KR을 못 불러올 때 쓰는 대체 서체 (DX새신문명조B, 한글 2,350자+영문 서브셋) */
+  @font-face {
+    font-family: "DX SaeSinmun Myeongjo";
+    src: url("fonts/DXNShnmB.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
   :root {
-    --navy: #0f1f6b;
-    --bronze: #8a6a3e;
-    --bg: #ffffff;
+    --navy: #0e065e;
+    --bronze: #8c6c4f;
+    --gray: #6b7280;
+    --serif: "Noto Serif KR", "DX SaeSinmun Myeongjo", "Nanum Myeongjo", "AppleMyungjo", "Batang", serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: var(--bg); -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  html { background: var(--navy); -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    background: var(--navy);
+    font-family: var(--serif);
   }
   body.locked { overflow: hidden; }
 
-  /* ===== 썸네일 (img_01) ===== */
+  /* ===== 메인 (Figma 360×800 기준) ===== */
+  .frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 520px;
+    min-height: 100%;
+    margin: 0 auto;
+    padding: 29px 14px 24px;
+    border: 16px solid var(--navy);
+    background: #fff;
+  }
+  .emblem { display: block; width: 80px; height: auto; }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 0;
+  }
+  .thanks {
+    color: var(--bronze);
+    font-size: clamp(14px, 4.2vw, 16px);
+    line-height: 1.55;
+    text-align: center;
+    word-break: keep-all;
+    text-wrap: balance;
+  }
   .poster {
     position: relative;
     display: block;
     width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
+    margin: 48px 0 0;
+    padding: 0;
     border: 0;
     background: none;
     cursor: zoom-in;
+    transition: transform .15s ease;
   }
   .poster img { display: block; width: 100%; height: auto; }
-  .poster:focus-visible { outline: 3px solid var(--bronze); outline-offset: -3px; }
-  .poster-hint {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 0 16px;
-    color: var(--navy);
-    font-size: 13px;
-    font-weight: 600;
+  .poster:active { transform: scale(.98); }
+  .zoom-badge {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: rgba(14, 6, 94, .8);
+    color: #fff;
     pointer-events: none;
   }
-  .poster-hint svg { width: 16px; height: 16px; }
+  .zoom-badge svg { width: 16px; height: 16px; }
+  .poster:focus-visible { outline: 3px solid var(--bronze); outline-offset: 3px; }
+  .guide {
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: center;
+    word-break: keep-all;
+  }
+  .note {
+    align-self: flex-end;
+    margin: 8px 0 32px;
+    color: #9ca3af;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: -.01em;
+    text-align: right;
+    word-break: keep-all;
+  }
+  .wordmark { display: block; width: min(86%, 300px); height: auto; }
 
-  /* ===== 뷰어 (img_02) ===== */
+  /* ===== 뷰어 ===== */
   .viewer {
     position: fixed;
     inset: 0;
@@ -67,7 +132,6 @@
     transition: opacity .25s ease, visibility .25s;
   }
   .viewer.open { opacity: 1; visibility: visible; }
-
   .viewer-bar {
     flex: none;
     display: flex;
@@ -91,37 +155,56 @@
     position: relative;
     flex: 1;
     min-height: 0;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
-    overscroll-behavior: contain;
-    scrollbar-width: none;
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+    overflow: hidden;
+    touch-action: none;        /* 제스처는 직접 처리 */
+    cursor: grab;
   }
-  .stage::-webkit-scrollbar { display: none; }
-  .canvas {
-    display: flex;
+  .stage.dragging { cursor: grabbing; }
+  .stage img {
+    position: absolute;
+    left: 0; top: 0;
+    max-width: none;
+    transform-origin: 0 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+  }
+  .loading {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 100%;
-    min-height: 100%;
-    width: max-content;
+    gap: 14px;
+    color: rgba(255,255,255,.85);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    pointer-events: none;
   }
-  .canvas img {
-    display: block;
-    max-width: none;
-    user-select: none;
-    -webkit-user-drag: none;
+  .loading.show { display: flex; }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid rgba(255,255,255,.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .9s linear infinite;
   }
-
+  @keyframes spin { to { transform: rotate(360deg); } }
   .swipe-hint {
     position: absolute;
     left: 50%;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+    bottom: 24px;
     transform: translateX(-50%);
     padding: 8px 14px;
     border-radius: 999px;
     background: rgba(0,0,0,.6);
     color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     font-size: 13px;
     white-space: nowrap;
     pointer-events: none;
@@ -129,42 +212,33 @@
   }
   .swipe-hint.hide { opacity: 0; }
 
-  .viewer-tools {
-    flex: none;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 12px);
-  }
-  .tool-btn {
-    min-width: 44px; height: 40px;
-    padding: 0 14px;
-    border: 1px solid rgba(255,255,255,.25);
-    border-radius: 20px;
-    background: transparent;
-    color: #fff;
-    font: inherit;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  .tool-btn:active { background: rgba(255,255,255,.15); }
-
   @media (prefers-reduced-motion: reduce) {
-    .viewer, .swipe-hint { transition: none; }
+    .viewer, .swipe-hint, .poster { transition: none; }
+    .spinner { animation-duration: 2.5s; }
   }
 </style>
 </head>
 <body>
-  <div style="display: flex;display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
-  <!-- 이미지 경로만 바꿔서 사용하세요 -->
-  <button type="button" class="poster" id="openViewer" aria-label="OKIS HONORS CLUB 전체 사진 크게 보기">
-    <img src="img/img_01.png" alt="OKIS HONORS CLUB 기부자 명판 안내">
-    <span class="poster-hint">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
-      눌러서 크게 보기
-    </span>
-  </button>
-  </div>
+  <main class="frame">
+    <img class="emblem" src="img/emblem.jpg" alt="오사카코리안인터내셔널스쿨 엠블럼" width="206" height="276">
+
+    <div class="body">
+      <p class="thanks">기부자님의 소중한 이름을 새겨넣었습니다.<br>다시한번 OKIS에 보내주신 따뜻한 마음에 감사 드립니다.</p>
+
+      <button type="button" class="poster" id="openViewer" aria-label="OKIS HONORS CLUB 명판 사진 크게 보기">
+        <img src="img/thumb.jpg" alt="OKIS HONORS CLUB 기부자 명판 벽면" width="1575" height="533">
+        <span class="zoom-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+        </span>
+      </button>
+      <p class="note">* 고화질 사진이라 로딩이 다소 느릴 수 있습니다.</p>
+
+      <p class="guide">위 사진을 클릭하시면<br>귀하의 이름을 찾아보실 수 있습니다.</p>
+    </div>
+
+    <img class="wordmark" src="img/title.jpg" alt="OKIS HONORS CLUB" width="1293" height="98">
+  </main>
+
   <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="OKIS HONORS CLUB 전체 사진" aria-hidden="true">
     <div class="viewer-bar">
       <span class="viewer-title">OKIS HONORS CLUB</span>
@@ -172,157 +246,266 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
-
     <div class="stage" id="stage">
-      <div class="canvas">
-        <img id="bigImg" src="img/img_02.jpg" alt="OKIS HONORS CLUB 기부자 명판 벽면 전체">
+      <!-- 고해상도 원본 이미지 -->
+      <img id="bigImg" src="img/img_02.jpg" alt="OKIS HONORS CLUB 기부자 명판 벽면 전체" draggable="false">
+      <div class="loading" id="loading" role="status">
+        <span class="spinner" aria-hidden="true"></span>
+        <span>사진을 불러오는 중입니다.<br>용량이 커서 조금 걸릴 수 있어요.</span>
       </div>
-      <div class="swipe-hint" id="swipeHint">좌우로 밀어서 보세요 · 두 손가락으로 확대</div>
-    </div>
-
-    <div class="viewer-tools">
-      <button type="button" class="tool-btn" id="zoomOut" aria-label="축소">－</button>
-      <button type="button" class="tool-btn" id="fitAll">전체 보기</button>
-      <button type="button" class="tool-btn" id="zoomIn" aria-label="확대">＋</button>
+      <div class="swipe-hint" id="swipeHint">좌우로 밀어서 보고, 두 손가락으로 벌려 확대하세요</div>
     </div>
   </div>
 
 <script>
 (function () {
-  const viewer  = document.getElementById('viewer');
-  const stage   = document.getElementById('stage');
-  const img     = document.getElementById('bigImg');
-  const hint    = document.getElementById('swipeHint');
-  const openBtn = document.getElementById('openViewer');
-  const closeBtn= document.getElementById('closeViewer');
+  const viewer   = document.getElementById('viewer');
+  const stage    = document.getElementById('stage');
+  const img      = document.getElementById('bigImg');
+  const hint     = document.getElementById('swipeHint');
+  const openBtn  = document.getElementById('openViewer');
+  const closeBtn = document.getElementById('closeViewer');
+  const loading  = document.getElementById('loading');
 
-  let fitH = 0;      // 이미지 전체가 화면에 들어가는 높이 (scale 1)
-  let fillScale = 1; // 화면 높이를 꽉 채우는 배율 (기본 시작값)
-  let scale = 1;
-  const MAX_WIDTH = 14000; // 최대 확대 시 이미지 가로 폭(px) — 더 키우려면 이 값을 올리세요
+  const MAX_WIDTH = 14000; // 최대 확대 시 이미지 가로 폭(px)
 
-  function ratio() {
-    return (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1575 / 533;
+  // baseW/H: 이미지 전체가 화면에 들어가는 크기(scale 1)
+  let baseW = 0, baseH = 0, fillScale = 1;
+  let s = 1, tx = 0, ty = 0;   // 현재 배율과 위치
+  let layoutS = 1;             // img width/height에 반영된 배율 (선명도용)
+
+  const ratio = () => (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1575 / 533;
+  const minScale = () => 1;
+  const maxScale = () => Math.max(fillScale * 3, MAX_WIDTH / baseW);
+
+  function computeBase() {
+    const W = stage.clientWidth, H = stage.clientHeight, r = ratio();
+    baseH = Math.min(H, W / r);
+    baseW = baseH * r;
+    fillScale = Math.max(1, H / baseH);
   }
 
-  function computeFit() {
-    const w = stage.clientWidth, h = stage.clientHeight;
-    fitH = Math.min(h, w / ratio());
-    fillScale = Math.max(1, h / fitH);
+  // 화면 밖으로 빠지지 않게 위치 보정 (작으면 가운데 정렬)
+  function clamp() {
+    const W = stage.clientWidth, H = stage.clientHeight;
+    const w = baseW * s, h = baseH * s;
+    tx = w <= W ? (W - w) / 2 : Math.min(0, Math.max(W - w, tx));
+    ty = h <= H ? (H - h) / 2 : Math.min(0, Math.max(H - h, ty));
   }
 
-  function maxScale() { return Math.max(fillScale * 3, MAX_WIDTH / (fitH * ratio())); }
+  function render() {
+    const k = s / layoutS;
+    img.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${k})`;
+  }
 
-  // 지정한 화면 좌표(px, py)를 기준점으로 배율 변경
-  function setScale(next, px, py) {
-    next = Math.min(maxScale(), Math.max(1, next));
-    const rect = stage.getBoundingClientRect();
-    if (px == null) { px = rect.width / 2; py = rect.height / 2; }
-    const cx = stage.scrollLeft + px;
-    const cy = stage.scrollTop + py;
-    const k = next / scale;
-    scale = next;
-    img.style.height = (fitH * scale) + 'px';
-    img.style.width  = (fitH * scale * ratio()) + 'px';
-    stage.scrollLeft = cx * k - px;
-    stage.scrollTop  = cy * k - py;
+  // 제스처가 끝나면 실제 크기로 다시 그려서 확대 상태에서도 선명하게
+  function commit() {
+    layoutS = s;
+    img.style.width  = (baseW * s) + 'px';
+    img.style.height = (baseH * s) + 'px';
+    render();
+  }
+
+  // 화면 좌표(px, py) 지점을 고정한 채로 배율 변경
+  function zoomAt(next, px, py) {
+    next = Math.min(maxScale(), Math.max(minScale(), next));
+    const ix = (px - tx) / s, iy = (py - ty) / s;
+    s = next;
+    tx = px - ix * s;
+    ty = py - iy * s;
+    clamp();
   }
 
   function resetView() {
-    computeFit();
-    scale = 1;
-    img.style.height = fitH + 'px';
-    img.style.width  = (fitH * ratio()) + 'px';
-    setScale(fillScale);
-    // 시작 위치: 가운데 (학교 엠블럼)
-    stage.scrollLeft = (stage.scrollWidth - stage.clientWidth) / 2;
-    stage.scrollTop  = (stage.scrollHeight - stage.clientHeight) / 2;
+    computeBase();
+    s = fillScale;               // 화면 높이를 꽉 채운 상태로 시작
+    tx = (stage.clientWidth - baseW * s) / 2;   // 가운데(학교 엠블럼)부터
+    ty = 0;
+    clamp();
+    commit();
   }
 
+  function showLoadError() {
+    loading.classList.add('show');
+    loading.querySelector('.spinner').style.display = 'none';
+    loading.lastElementChild.innerHTML = '사진을 불러오지 못했습니다.<br>잠시 후 다시 열어 주세요.';
+  }
+
+  // ===== 열기 / 닫기 =====
   function open() {
     viewer.classList.add('open');
     viewer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('locked');
     hint.classList.remove('hide');
-    if (img.complete) resetView(); else img.onload = resetView;
+    if (img.complete && img.naturalWidth) {
+      resetView();
+    } else {
+      loading.classList.add('show');
+      img.style.visibility = 'hidden';
+      img.onload = () => {
+        loading.classList.remove('show');
+        img.style.visibility = '';
+        resetView();
+      };
+      img.onerror = showLoadError;
+      if (img.complete) showLoadError();   // 이미 실패한 경우
+    }
     history.pushState({ viewer: true }, '');
     closeBtn.focus();
     clearTimeout(open.t);
-    open.t = setTimeout(() => hint.classList.add('hide'), 2500);
+    open.t = setTimeout(() => hint.classList.add('hide'), 2800);
   }
-
   function close(fromPop) {
     if (!viewer.classList.contains('open')) return;
+    stopInertia();
     viewer.classList.remove('open');
     viewer.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('locked');
     openBtn.focus();
     if (!fromPop && history.state && history.state.viewer) history.back();
   }
-
   openBtn.addEventListener('click', open);
   closeBtn.addEventListener('click', () => close(false));
-  window.addEventListener('popstate', () => close(true)); // 휴대폰 뒤로가기로 닫기
+  window.addEventListener('popstate', () => close(true));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(false); });
 
-  document.getElementById('zoomIn').addEventListener('click', () => setScale(scale * 1.8));
-  document.getElementById('zoomOut').addEventListener('click', () => setScale(scale / 1.8));
-  document.getElementById('fitAll').addEventListener('click', () => setScale(1));
+  // iOS Safari 페이지 자체 확대 막기 (뷰어 안에서는 이미지만 확대)
+  ['gesturestart', 'gesturechange'].forEach(t =>
+    viewer.addEventListener(t, e => e.preventDefault()));
 
-  stage.addEventListener('scroll', () => hint.classList.add('hide'), { passive: true });
+  // ===== 관성 스크롤 =====
+  let raf = 0, vx = 0, vy = 0, lastT = 0;
+  function stopInertia() { cancelAnimationFrame(raf); raf = 0; }
+  function inertia() {
+    let prev = performance.now();
+    const step = now => {
+      const dt = Math.min(32, now - prev); prev = now;
+      tx += vx * dt; ty += vy * dt;
+      const bx = tx, by = ty;
+      clamp();
+      if (bx !== tx) vx = 0;
+      if (by !== ty) vy = 0;
+      render();
+      const decay = Math.pow(0.95, dt / 16);
+      vx *= decay; vy *= decay;
+      if (Math.abs(vx) > 0.02 || Math.abs(vy) > 0.02) raf = requestAnimationFrame(step);
+      else raf = 0;
+    };
+    raf = requestAnimationFrame(step);
+  }
 
-  // ===== 핀치 줌 =====
-  let pinch = null;
-  const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+  // ===== 터치/마우스: 한 손가락 이동, 두 손가락 확대 =====
+  const pts = new Map();
+  let pan = null, pinch = null;
 
-  stage.addEventListener('touchstart', e => {
-    if (e.touches.length === 2) {
-      const [a, b] = e.touches;
-      pinch = { d: dist(a, b), s: scale };
+  function local(e) {
+    const r = stage.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  function startPan() {
+    const p = [...pts.values()][0];
+    pan = { x: p.x, y: p.y };
+    vx = vy = 0; lastT = performance.now();
+  }
+  function startPinch() {
+    const [a, b] = [...pts.values()];
+    const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    pinch = {
+      d: Math.hypot(a.x - b.x, a.y - b.y) || 1,
+      s: s,
+      ix: (mx - tx) / s,   // 두 손가락 가운데가 가리키는 이미지 위의 점
+      iy: (my - ty) / s
+    };
+    pan = null;
+  }
+
+  stage.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    stopInertia();
+    stage.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId, local(e));
+    hint.classList.add('hide');
+    if (pts.size === 1) { startPan(); stage.classList.add('dragging'); }
+    else if (pts.size === 2) startPinch();
+  });
+
+  stage.addEventListener('pointermove', e => {
+    if (!pts.has(e.pointerId)) return;
+    pts.set(e.pointerId, local(e));
+
+    if (pinch && pts.size >= 2) {
+      const [a, b] = [...pts.values()];
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      s = Math.min(maxScale(), Math.max(minScale(), pinch.s * d / pinch.d));
+      // 손가락 사이 지점이 그대로 손가락 아래에 머물도록
+      tx = mx - pinch.ix * s;
+      ty = my - pinch.iy * s;
+      clamp();
+      render();
+    } else if (pan && pts.size === 1) {
+      const p = pts.get(e.pointerId);
+      const dx = p.x - pan.x, dy = p.y - pan.y;
+      const now = performance.now(), dt = Math.max(1, now - lastT);
+      vx = vx * 0.6 + (dx / dt) * 0.4;
+      vy = vy * 0.6 + (dy / dt) * 0.4;
+      lastT = now;
+      pan.x = p.x; pan.y = p.y;
+      tx += dx; ty += dy;
+      clamp();
+      render();
     }
-  }, { passive: true });
+  });
 
-  stage.addEventListener('touchmove', e => {
-    if (pinch && e.touches.length === 2) {
-      e.preventDefault();
-      const [a, b] = e.touches;
-      const rect = stage.getBoundingClientRect();
-      const mx = (a.clientX + b.clientX) / 2 - rect.left;
-      const my = (a.clientY + b.clientY) / 2 - rect.top;
-      setScale(pinch.s * dist(a, b) / pinch.d, mx, my);
-      hint.classList.add('hide');
+  function endPointer(e) {
+    if (!pts.has(e.pointerId)) return;
+    pts.delete(e.pointerId);
+    if (pinch && pts.size < 2) {
+      pinch = null;
+      commit();                       // 확대 끝 → 선명하게 다시 그림
+      if (pts.size === 1) startPan(); // 남은 손가락으로 계속 이동
+    } else if (pts.size === 0) {
+      pan = null;
+      stage.classList.remove('dragging');
+      if (performance.now() - lastT < 80) inertia();
+    }
+  }
+  stage.addEventListener('pointerup', endPointer);
+  stage.addEventListener('pointercancel', endPointer);
+
+  // ===== PC: 트랙패드 핀치(ctrl+휠) 확대, 휠 스크롤 이동 =====
+  let wheelT = 0;
+  stage.addEventListener('wheel', e => {
+    e.preventDefault();
+    stopInertia();
+    hint.classList.add('hide');
+    if (e.ctrlKey) {
+      const p = local(e);
+      zoomAt(s * Math.exp(-e.deltaY * 0.01), p.x, p.y);
+      render();
+      clearTimeout(wheelT);
+      wheelT = setTimeout(commit, 150);
+    } else {
+      const H = stage.clientHeight;
+      const vertRoom = baseH * s > H;
+      tx -= e.deltaX || (vertRoom ? 0 : e.deltaY);
+      ty -= vertRoom ? e.deltaY : 0;
+      clamp();
+      render();
     }
   }, { passive: false });
 
-  stage.addEventListener('touchend', e => { if (e.touches.length < 2) pinch = null; });
-
-  // ===== 더블탭: 전체 보기 ↔ 화면 채우기 =====
-  let lastTap = 0;
-  stage.addEventListener('touchend', e => {
-    if (e.touches.length || e.changedTouches.length !== 1) return;
-    const now = Date.now();
-    if (now - lastTap < 280) {
-      const t = e.changedTouches[0];
-      const rect = stage.getBoundingClientRect();
-      const target = scale > 1.05 ? 1 : fillScale * 2.5;
-      setScale(target, t.clientX - rect.left, t.clientY - rect.top);
-      lastTap = 0;
-    } else {
-      lastTap = now;
-    }
-  });
-  stage.addEventListener('dblclick', e => {
-    const rect = stage.getBoundingClientRect();
-    setScale(scale > 1.05 ? 1 : fillScale * 2.5, e.clientX - rect.left, e.clientY - rect.top);
-  });
-
-  // 화면 회전 대응
+  // ===== 화면 회전 대응 =====
   window.addEventListener('resize', () => {
     if (!viewer.classList.contains('open')) return;
-    const rel = scale / fillScale;
-    computeFit();
-    scale = 1;
-    setScale(fillScale * rel);
+    const W0 = baseW * s;
+    const cx = (stage.clientWidth / 2 - tx) / W0;   // 화면 중앙이 보던 위치(비율)
+    const rel = s / fillScale;
+    computeBase();
+    s = Math.min(maxScale(), Math.max(1, fillScale * rel));
+    tx = stage.clientWidth / 2 - cx * baseW * s;
+    clamp();
+    commit();
   });
 })();
 </script>
