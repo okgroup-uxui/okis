@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OKIS 기부자 월</title>
+<meta property="og:image" content="https://okgroup-uxui.github.io/okis/03/img/og-image.jpg">
+<meta property="og:url" content="https://okgroup-uxui.github.io/okis/03/">
+<style>
+  :root {
+    --navy: #0f1f6b;
+    --bronze: #8a6a3e;
+    --bg: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+    padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  }
+  body.locked { overflow: hidden; }
+
+  /* ===== 썸네일 (img_01) ===== */
+  .poster {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+  }
+  .poster img { display: block; width: 100%; height: auto; }
+  .poster:focus-visible { outline: 3px solid var(--bronze); outline-offset: -3px; }
+  .poster-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 0 16px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .poster-hint svg { width: 16px; height: 16px; }
+
+  /* ===== 뷰어 (img_02) ===== */
+  .viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    background: #0a0f2a;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s;
+  }
+  .viewer.open { opacity: 1; visibility: visible; }
+
+  .viewer-bar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px 16px;
+    color: #fff;
+  }
+  .viewer-title { font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+  .close-btn {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 0; border-radius: 50%;
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    cursor: pointer;
+  }
+  .close-btn svg { width: 22px; height: 22px; }
+
+  .stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+  .stage::-webkit-scrollbar { display: none; }
+  .canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    min-height: 100%;
+    width: max-content;
+  }
+  .canvas img {
+    display: block;
+    max-width: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .swipe-hint {
+    position: absolute;
+    left: 50%;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    font-size: 13px;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity .4s;
+  }
+  .swipe-hint.hide { opacity: 0; }
+
+  .viewer-tools {
+    flex: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 16px calc(env(safe-area-inset-bottom, 0px) + 12px);
+  }
+  .tool-btn {
+    min-width: 44px; height: 40px;
+    padding: 0 14px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .tool-btn:active { background: rgba(255,255,255,.15); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viewer, .swipe-hint { transition: none; }
+  }
+</style>
+</head>
+<body>
+  
+  <div style="display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
+
+  <!-- 이미지 경로만 바꿔서 사용하세요 -->
+  <button type="button" class="poster" id="openViewer" aria-label="OKIS HONORS CLUB 전체 사진 크게 보기">
+    <img src="img/img_01.jpg" alt="OKIS HONORS CLUB 기부자 명판 안내">
+    <span class="poster-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg>
+      눌러서 크게 보기
+    </span>
+  </button>
+
+  </div>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="OKIS HONORS CLUB 전체 사진" aria-hidden="true">
+    <div class="viewer-bar">
+      <span class="viewer-title">OKIS HONORS CLUB</span>
+      <button type="button" class="close-btn" id="closeViewer" aria-label="닫기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="stage" id="stage">
+      <div class="canvas">
+        <img id="bigImg" src="img/img_02.jpg" alt="OKIS HONORS CLUB 기부자 명판 벽면 전체">
+      </div>
+      <div class="swipe-hint" id="swipeHint">좌우로 밀어서 보세요 · 두 손가락으로 확대</div>
+    </div>
+
+    <div class="viewer-tools">
+      <button type="button" class="tool-btn" id="zoomOut" aria-label="축소">－</button>
+      <button type="button" class="tool-btn" id="fitAll">전체 보기</button>
+      <button type="button" class="tool-btn" id="zoomIn" aria-label="확대">＋</button>
+    </div>
+  </div>
+
+<script>
+(function () {
+  const viewer  = document.getElementById('viewer');
+  const stage   = document.getElementById('stage');
+  const img     = document.getElementById('bigImg');
+  const hint    = document.getElementById('swipeHint');
+  const openBtn = document.getElementById('openViewer');
+  const closeBtn= document.getElementById('closeViewer');
+
+  let fitH = 0;      // 이미지 전체가 화면에 들어가는 높이 (scale 1)
+  let fillScale = 1; // 화면 높이를 꽉 채우는 배율 (기본 시작값)
+  let scale = 1;
+  const MAX_FACTOR = 3; // fillScale 대비 최대 확대
+
+  function ratio() {
+    return (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1575 / 533;
+  }
+
+  function computeFit() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    fitH = Math.min(h, w / ratio());
+    fillScale = Math.max(1, h / fitH);
+  }
+
+  function maxScale() { return fillScale * MAX_FACTOR; }
+
+  // 지정한 화면 좌표(px, py)를 기준점으로 배율 변경
+  function setScale(next, px, py) {
+    next = Math.min(maxScale(), Math.max(1, next));
+    const rect = stage.getBoundingClientRect();
+    if (px == null) { px = rect.width / 2; py = rect.height / 2; }
+    const cx = stage.scrollLeft + px;
+    const cy = stage.scrollTop + py;
+    const k = next / scale;
+    scale = next;
+    img.style.height = (fitH * scale) + 'px';
+    img.style.width  = (fitH * scale * ratio()) + 'px';
+    stage.scrollLeft = cx * k - px;
+    stage.scrollTop  = cy * k - py;
+  }
+
+  function resetView() {
+    computeFit();
+    scale = 1;
+    img.style.height = fitH + 'px';
+    img.style.width  = (fitH * ratio()) + 'px';
+    setScale(fillScale);
+    // 시작 위치: 가운데 (학교 엠블럼)
+    stage.scrollLeft = (stage.scrollWidth - stage.clientWidth) / 2;
+    stage.scrollTop  = (stage.scrollHeight - stage.clientHeight) / 2;
+  }
+
+  function open() {
+    viewer.classList.add('open');
+    viewer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('locked');
+    hint.classList.remove('hide');
+    if (img.complete) resetView(); else img.onload = resetView;
+    history.pushState({ viewer: true }, '');
+    closeBtn.focus();
+    clearTimeout(open.t);
+    open.t = setTimeout(() => hint.classList.add('hide'), 2500);
+  }
+
+  function close(fromPop) {
+    if (!viewer.classList.contains('open')) return;
+    viewer.classList.remove('open');
+    viewer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('locked');
+    openBtn.focus();
+    if (!fromPop && history.state && history.state.viewer) history.back();
+  }
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', () => close(false));
+  window.addEventListener('popstate', () => close(true)); // 휴대폰 뒤로가기로 닫기
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(false); });
+
+  document.getElementById('zoomIn').addEventListener('click', () => setScale(scale * 1.5));
+  document.getElementById('zoomOut').addEventListener('click', () => setScale(scale / 1.5));
+  document.getElementById('fitAll').addEventListener('click', () => setScale(1));
+
+  stage.addEventListener('scroll', () => hint.classList.add('hide'), { passive: true });
+
+  // ===== 핀치 줌 =====
+  let pinch = null;
+  const dist = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+
+  stage.addEventListener('touchstart', e => {
+    if (e.touches.length === 2) {
+      const [a, b] = e.touches;
+      pinch = { d: dist(a, b), s: scale };
+    }
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', e => {
+    if (pinch && e.touches.length === 2) {
+      e.preventDefault();
+      const [a, b] = e.touches;
+      const rect = stage.getBoundingClientRect();
+      const mx = (a.clientX + b.clientX) / 2 - rect.left;
+      const my = (a.clientY + b.clientY) / 2 - rect.top;
+      setScale(pinch.s * dist(a, b) / pinch.d, mx, my);
+      hint.classList.add('hide');
+    }
+  }, { passive: false });
+
+  stage.addEventListener('touchend', e => { if (e.touches.length < 2) pinch = null; });
+
+  // ===== 더블탭: 전체 보기 ↔ 화면 채우기 =====
+  let lastTap = 0;
+  stage.addEventListener('touchend', e => {
+    if (e.touches.length || e.changedTouches.length !== 1) return;
+    const now = Date.now();
+    if (now - lastTap < 280) {
+      const t = e.changedTouches[0];
+      const rect = stage.getBoundingClientRect();
+      const target = scale > 1.05 ? 1 : fillScale * 1.5;
+      setScale(target, t.clientX - rect.left, t.clientY - rect.top);
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  });
+  stage.addEventListener('dblclick', e => {
+    const rect = stage.getBoundingClientRect();
+    setScale(scale > 1.05 ? 1 : fillScale * 1.5, e.clientX - rect.left, e.clientY - rect.top);
+  });
+
+  // 화면 회전 대응
+  window.addEventListener('resize', () => {
+    if (!viewer.classList.contains('open')) return;
+    const rel = scale / fillScale;
+    computeFit();
+    scale = 1;
+    setScale(fillScale * rel);
+  });
+})();
+</script>
+</body>
+</html>
